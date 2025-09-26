@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAllBlogs, createBlog, updateBlog, deleteBlog } from '../api/blog';
+import { getAllBlogs, createBlog, updateBlog, deleteBlog } from '../../api/blog';
 import { FiEdit, FiTrash2, FiPlus, FiX } from 'react-icons/fi';
 
 const AdminBlog = () => {

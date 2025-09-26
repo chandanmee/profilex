@@ -13,7 +13,7 @@ const Login = () => {
   const location = useLocation();
 
   // Get the redirect path from location state or default to admin/blog
-  const from = location.state?.from?.pathname || '/admin/blog';
+  const from = location.state?.from?.pathname || '/admin/';
 
   // If already authenticated, redirect to the intended page
   useEffect(() => {

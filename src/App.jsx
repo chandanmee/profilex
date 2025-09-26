@@ -6,12 +6,19 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import AdminBlog from './pages/AdminBlog';
+import Blog from './pages/blog/Blog';
+import BlogPost from './pages/blog/BlogPost';
+import AdminBlog from './pages/admin/AdminBlog';
 import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
+// CMS Components
+import AdminDashboard from './pages/admin/AdminDashboard';
+import BlogManager from './pages/admin/BlogManager';
+import BlogEditor from './pages/admin/BlogEditor';
+import KnowledgeManager from './pages/knowledge/KnowledgeManager';
+import KnowledgeEditor from './pages/knowledge/KnowledgeEditor';
+import MediaManager from './pages/admin/MediaManager';
 // import CustomCursor from "./components/CustomCursor";
 
 const App = () => {
@@ -30,6 +37,52 @@ const App = () => {
             <Route path="/admin/blog" element={
               <ProtectedRoute>
                 <AdminBlog />
+              </ProtectedRoute>
+            } />
+            {/* CMS Routes */}
+            <Route path="/admin" element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/dashboard" element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/blog-manager" element={
+              <ProtectedRoute>
+                <BlogManager />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/blog-editor" element={
+              <ProtectedRoute>
+                <BlogEditor />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/blog-editor/:id" element={
+              <ProtectedRoute>
+                <BlogEditor />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/knowledge-manager" element={
+              <ProtectedRoute>
+                <KnowledgeManager />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/knowledge-editor" element={
+              <ProtectedRoute>
+                <KnowledgeEditor />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/knowledge-editor/:id" element={
+              <ProtectedRoute>
+                <KnowledgeEditor />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/media-manager" element={
+              <ProtectedRoute>
+                <MediaManager />
               </ProtectedRoute>
             } />
             <Route path="/contact" element={<Contact />} />

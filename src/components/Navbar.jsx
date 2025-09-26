@@ -101,9 +101,9 @@ const Navbar = () => {
                   transition={{ duration: 0.5, delay: 0.6 }}
                 >
                   <Link
-                    to="/admin/blog"
+                    to="/admin/"
                     className={`font-medium ${navItemHoverColor} transition-colors flex items-center ${
-                      location.pathname === '/admin/blog'
+                      location.pathname === '/admin/'
                         ? 'text-primary-600 dark:text-primary-400'
                         : navItemColor
                     }`}

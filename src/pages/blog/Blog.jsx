@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAllBlogs } from '../api/blog';
+import { getAllBlogs } from '../../api/blog';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiSearch, FiCalendar, FiUser, FiTag, FiArrowRight } from 'react-icons/fi';
