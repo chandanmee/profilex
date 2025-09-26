@@ -47,11 +47,14 @@ const secondRow = industries.slice(Math.ceil(industries.length / 2));
 
 const IndustrySection = () => {
   return (
-    <section className="py-20 relative overflow-hidden">
-      {/* Light Rays Background */}
-      <div className="absolute inset-0 z-0">
+    <section className="py-20 relative overflow-hidden bg-gray-50 dark:bg-transparent">
+      {/* Light Rays Background - only show in dark mode */}
+      <div className="absolute inset-0 z-0 dark:block hidden">
         <DarkVeil />
       </div>
+
+      {/* Light mode background */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-primary-50/50 via-gray-50 to-primary-100/30 dark:hidden"></div>
 
       {/* Content */}
       <div className="container relative z-10">
@@ -79,8 +82,8 @@ const IndustrySection = () => {
         {/* Marquee Slider */}
         <div className="relative w-full overflow-hidden">
           {/* Gradient Edges */}
-          <div className="absolute left-0 top-0 w-24 h-full bg-gradient-to-r from-gray-50/80 dark:from-dark-900/80 to-transparent z-20"></div>
-          <div className="absolute right-0 top-0 w-24 h-full bg-gradient-to-l from-gray-50/80 dark:from-dark-900/80 to-transparent z-20"></div>
+          <div className="absolute left-0 top-0 w-24 h-full bg-gradient-to-r from-gray-50 dark:from-dark-900/80 to-transparent z-20"></div>
+          <div className="absolute right-0 top-0 w-24 h-full bg-gradient-to-l from-gray-50 dark:from-dark-900/80 to-transparent z-20"></div>
 
           {/* Row 1 */}
           <div className="flex space-x-6 animate-marquee">
@@ -88,8 +91,8 @@ const IndustrySection = () => {
               <div
                 key={`row1-${i}`}
                 className="min-w-[220px] px-6 py-6 rounded-xl flex flex-col items-center justify-center
-                           bg-white/10 dark:bg-white/5 
-                           backdrop-blur-md border border-white/20 
+                           bg-white/80 dark:bg-white/10 
+                           backdrop-blur-md border border-gray-200 dark:border-white/20 
                            shadow-md text-dark-900 dark:text-gray-200 
                            font-semibold hover:border-primary-500 hover:shadow-lg 
                            transition-all duration-300 cursor-pointer"
@@ -108,8 +111,8 @@ const IndustrySection = () => {
               <div
                 key={`row2-${i}`}
                 className="min-w-[220px] px-6 py-6 rounded-xl flex flex-col items-center justify-center
-                           bg-white/10 dark:bg-white/5 
-                           backdrop-blur-md border border-white/20 
+                           bg-white/80 dark:bg-white/10 
+                           backdrop-blur-md border border-gray-200 dark:border-white/20 
                            shadow-md text-dark-900 dark:text-gray-200 
                            font-semibold hover:border-primary-500 hover:shadow-lg 
                            transition-all duration-300 cursor-pointer"

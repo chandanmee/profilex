@@ -76,7 +76,7 @@ const Contact = () => {
     {
       icon: <FiMapPin />,
       title: 'Location',
-      content: 'New Delhi, India',
+      content: 'Spice Garden, AECS Layout, Marathalli, Bengaluru',
       link: 'https://maps.google.com/?q=New+Delhi,+India',
     },
   ];
