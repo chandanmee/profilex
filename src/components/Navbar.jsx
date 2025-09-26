@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FiSun, FiMoon, FiMenu, FiX, FiSettings, FiLogOut } from 'react-icons/fi';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
+
 // Assets
-import chandanLogo from "../assets/chandan_mee_lt.png"; 
+import chandanLogoLt from "../assets/chandan_mee_lt.png"; 
+import chandanLogoDk from "../assets/chandan_mee.png"; // Import the dark logo
+ 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -39,11 +42,16 @@ const Navbar = () => {
     setIsOpen(false);
   }, [location]);
 
+  // Determine the color class for text and icons on scroll, but only in light mode
+  const navItemColor = (scrolled && !isDarkMode) ? 'text-dark-700' : 'text-gray-200';
+  const navItemHoverColor = isDarkMode ? 'dark:hover:text-primary-400' : 'hover:text-primary-600';
+
   return (
     <header
       className={`fixed w-full z-50 transition-all duration-300 ${scrolled
         ? 'py-3 bg-white/90 dark:bg-dark-800/90 backdrop-blur-md shadow-md'
-        : 'py-5 bg-transparent'}`}
+        : 'py-5 bg-transparent'
+      }`}
     >
       <div className="container flex justify-between items-center">
         <Link to="/" className="flex items-center">
@@ -51,14 +59,14 @@ const Navbar = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-2xl font-bold text-primary-600 dark:text-primary-400"
+            className="text-2xl font-bold"
           >
-                                <img
-              src={chandanLogo}
+            <img
+              // Change the logo only if scrolled AND NOT in dark mode
+              src={scrolled && !isDarkMode ? chandanLogoDk : chandanLogoLt}
               alt="Logo Chandan Mee"
               className="w-48 md:w-60 max-w-full"
             />
-            {/* Chandan<span className="text-dark-900 dark:text-white">Mee</span> */}
           </motion.div>
         </Link>
 
@@ -74,9 +82,12 @@ const Navbar = () => {
               >
                 <Link
                   to={link.path}
-                  className={`font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors ${location.pathname === link.path
-                    ? 'text-primary-600 dark:text-primary-400'
-                    : 'text-dark-700 dark:text-gray-200'}`}
+                  // Apply dynamic text colors
+                  className={`font-medium ${navItemHoverColor} dark:hover:text-primary-400 transition-colors ${
+                    location.pathname === link.path
+                      ? 'text-primary-600 dark:text-primary-400'
+                      : navItemColor
+                  }`}
                 >
                   {link.name}
                 </Link>
@@ -91,9 +102,11 @@ const Navbar = () => {
                 >
                   <Link
                     to="/admin/blog"
-                    className={`font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center ${location.pathname === '/admin/blog'
-                      ? 'text-primary-600 dark:text-primary-400'
-                      : 'text-dark-700 dark:text-gray-200'}`}
+                    className={`font-medium ${navItemHoverColor} transition-colors flex items-center ${
+                      location.pathname === '/admin/blog'
+                        ? 'text-primary-600 dark:text-primary-400'
+                        : navItemColor
+                    }`}
                   >
                     <FiSettings className="mr-1" /> Admin
                   </Link>
@@ -105,7 +118,7 @@ const Navbar = () => {
                 >
                   <button
                     onClick={logout}
-                    className="font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center text-dark-700 dark:text-gray-200"
+                    className={`font-medium ${navItemHoverColor} transition-colors flex items-center ${navItemColor}`}
                   >
                     <FiLogOut className="mr-1" /> Logout
                   </button>
@@ -120,9 +133,11 @@ const Navbar = () => {
               >
                 <Link
                   to="/login"
-                  className={`font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center ${location.pathname === '/login'
-                    ? 'text-primary-600 dark:text-primary-400'
-                    : 'text-dark-700 dark:text-gray-200'}`}
+                  className={`font-medium ${navItemHoverColor} transition-colors flex items-center ${
+                    location.pathname === '/login'
+                      ? 'text-primary-600 dark:text-primary-400'
+                      : navItemColor
+                  }`}
                 >
                   <FiLogOut className="mr-1" /> Login
                 </Link>
@@ -162,7 +177,7 @@ const Navbar = () => {
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-2 rounded-md text-dark-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-700 transition-colors"
+            className={`p-2 rounded-md hover:bg-gray-100 dark:hover:bg-dark-700 transition-colors ${navItemColor}`}
             aria-label="Toggle menu"
           >
             {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -183,9 +198,11 @@ const Navbar = () => {
                 <li key={link.name}>
                   <Link
                     to={link.path}
-                    className={`block font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors ${location.pathname === link.path
-                      ? 'text-primary-600 dark:text-primary-400'
-                      : 'text-dark-700 dark:text-gray-200'}`}
+                    className={`block font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors ${
+                      location.pathname === link.path
+                        ? 'text-primary-600 dark:text-primary-400'
+                        : 'text-dark-700 dark:text-gray-200'
+                    }`}
                   >
                     {link.name}
                   </Link>
@@ -196,9 +213,11 @@ const Navbar = () => {
                   <li>
                     <Link
                       to="/admin/blog"
-                      className={`block font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center ${location.pathname === '/admin/blog'
-                        ? 'text-primary-600 dark:text-primary-400'
-                        : 'text-dark-700 dark:text-gray-200'}`}
+                      className={`block font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center ${
+                        location.pathname === '/admin/blog'
+                          ? 'text-primary-600 dark:text-primary-400'
+                          : 'text-dark-700 dark:text-gray-200'
+                      }`}
                     >
                       <FiSettings className="mr-1" /> Admin
                     </Link>
@@ -217,9 +236,11 @@ const Navbar = () => {
                 <li>
                   <Link
                     to="/login"
-                    className={`block font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center ${location.pathname === '/login'
-                      ? 'text-primary-600 dark:text-primary-400'
-                      : 'text-dark-700 dark:text-gray-200'}`}
+                    className={`block font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center ${
+                      location.pathname === '/login'
+                        ? 'text-primary-600 dark:text-primary-400'
+                        : 'text-dark-700 dark:text-gray-200'
+                    }`}
                   >
                     <FiLogOut className="mr-1" /> Login
                   </Link>

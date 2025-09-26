@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 // Assets
-import bgPattern from "../assets/illustrations/dots-pattern-bg.png"; 
-import reactCertificate from "../assets/gallery/tcs_certificate.png"; 
-import awsCertificate from "../assets/gallery/tcs_certificate.png"; 
-import accentureCertificate from "../assets/gallery/tcs_certificate.png"; 
-import tcsCertificate from "../assets/gallery/tcs_certificate.png"; 
-import jsFreeCodeCertificate from "../assets/gallery/tcs_certificate.png"; 
-import responsiveFreeCodeCertificate from "../assets/gallery/tcs_certificate.png"; 
-import googleDigitalCertificate from "../assets/gallery/tcs_certificate.png"; 
+import bgPattern from "@assets/illustrations/dots-pattern-bg.png"; 
+import reactCertificate from "@assets/gallery/tcs_certificate.png"; 
+import awsCertificate from "@assets/gallery/tcs_certificate.png"; 
+import accentureCertificate from "@assets/gallery/tcs_certificate.png"; 
+import tcsCertificate from "@assets/gallery/tcs_certificate.png"; 
+import jsFreeCodeCertificate from "@assets/gallery/tcs_certificate.png"; 
+import responsiveFreeCodeCertificate from "@assets/gallery/tcs_certificate.png"; 
+import googleDigitalCertificate from "@assets/gallery/tcs_certificate.png"; 
 
 // Sample Achievements
 const achievements = [

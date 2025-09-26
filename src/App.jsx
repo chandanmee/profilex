@@ -12,6 +12,7 @@ import AdminBlog from './pages/AdminBlog';
 import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
+// import CustomCursor from "./components/CustomCursor";
 
 const App = () => {
   return (

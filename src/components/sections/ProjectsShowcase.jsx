@@ -1,50 +1,74 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { FiExternalLink, FiGithub } from 'react-icons/fi';
+import React from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { FiExternalLink, FiGithub } from "react-icons/fi";
 // Assets
-import netcloveProj from "../assets/gallery/netclove_proj.png";
-import jrdigitalProj from "../assets/gallery/jrdigital_proj.png";
-import mbtechlifeProj from "../assets/gallery/mbtechlife_proj.png";
-import riayanahomesProj from "../assets/gallery/riayanahomes_proj.png";
-import edumossProj from "../assets/gallery/edumoss_proj.png";
+import netcloveProj from '@assets/gallery/netclove_proj.png';
+import jrdigitalProj from '@assets/gallery/jrdigital_proj.png';
+import mbtechlifeProj from '@assets/gallery/mbtechlife_proj.png';
+import riayanahomesProj from '@assets/gallery/riayanahomes_proj.png';
+import edumossProj from '@assets/gallery/edumoss_proj.png';
 const ProjectsShowcase = () => {
   const projects = [
     {
       id: 1,
-      title: 'Cyberites',
-      description: 'A comprehensive resource management platform for teams to organize and share digital assets.',
+      title: "Cyberites",
+      description:
+        "A comprehensive resource management platform for teams to organize and share digital assets.",
       image: netcloveProj,
-      tags: ['React', 'Node.js', 'MongoDB', 'Tailwind CSS'],
-      liveLink: '#',
-      githubLink: '#',
+      tags: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+      liveLink: "#",
+      githubLink: "#",
     },
     {
       id: 2,
-      title: 'ElevateX',
-      description: 'A modern learning management system with interactive courses and progress tracking.',
+      title: "ElevateX",
+      description:
+        "A modern learning management system with interactive courses and progress tracking.",
       image: jrdigitalProj,
-      tags: ['React', 'Firebase', 'Tailwind CSS', 'Redux'],
-      liveLink: '#',
-      githubLink: '#',
+      tags: ["React", "Firebase", "Tailwind CSS", "Redux"],
+      liveLink: "#",
+      githubLink: "#",
     },
     {
       id: 3,
-      title: 'FusionDesk',
-      description: 'An all-in-one customer support and help desk solution for businesses.',
+      title: "FusionDesk",
+      description:
+        "An all-in-one customer support and help desk solution for businesses.",
       image: mbtechlifeProj,
-      tags: ['React', 'Express', 'PostgreSQL', 'Socket.io'],
-      liveLink: '#',
-      githubLink: '#',
+      tags: ["React", "Express", "PostgreSQL", "Socket.io"],
+      liveLink: "#",
+      githubLink: "#",
     },
     {
       id: 4,
-      title: 'PulseMetrics',
-      description: 'Real-time analytics dashboard for monitoring business performance metrics.',
+      title: "PulseMetrics",
+      description:
+        "Real-time analytics dashboard for monitoring business performance metrics.",
       image: riayanahomesProj,
-      tags: ['React', 'D3.js', 'Node.js', 'MongoDB'],
-      liveLink: '#',
-      githubLink: '#',
+      tags: ["React", "D3.js", "Node.js", "MongoDB"],
+      liveLink: "#",
+      githubLink: "#",
+    },
+        {
+      id: 5,
+      title: "ElevateX",
+      description:
+        "A modern learning management system with interactive courses and progress tracking.",
+      image: jrdigitalProj,
+      tags: ["React", "Firebase", "Tailwind CSS", "Redux"],
+      liveLink: "#",
+      githubLink: "#",
+    },
+    {
+      id: 6,
+      title: "FusionDesk",
+      description:
+        "An all-in-one customer support and help desk solution for businesses.",
+      image: mbtechlifeProj,
+      tags: ["React", "Express", "PostgreSQL", "Socket.io"],
+      liveLink: "#",
+      githubLink: "#",
     },
   ];
 
@@ -61,12 +85,13 @@ const ProjectsShowcase = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-dark-900 dark:text-white mb-2">
             Recent Works
           </h2>
-          <p className="text-xl text-dark-600 dark:text-gray-300">
+
+          <p className="text-dark-600 dark:text-gray-400 mt-2 py-2">
             My Portfolio
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -138,10 +163,7 @@ const ProjectsShowcase = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-12 text-center"
         >
-          <Link
-            to="/projects"
-            className="btn btn-primary"
-          >
+          <Link to="/projects" className="btn btn-primary">
             View All Projects
           </Link>
         </motion.div>

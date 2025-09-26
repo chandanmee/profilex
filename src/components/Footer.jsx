@@ -21,10 +21,20 @@ const Footer = () => {
     { name: 'Contact', path: '/contact' },
   ];
 
+  const technologies = [
+    "HTML, CSS & JS",
+    "React.js & Redux",
+    "Tailwind CSS / Bootstrap",
+    "UI/UX (Figma, Illustrator)",
+    "Performance & SEO"
+  ];
+
   return (
     <footer className="bg-gray-50 dark:bg-dark-900 py-12">
       <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Expanded grid for new column */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Brand Info */}
           <div>
             <Link to="/" className="flex items-center mb-4">
               <h3 className="text-2xl font-bold text-primary-600 dark:text-primary-400">
@@ -52,6 +62,22 @@ const Footer = () => {
             </div>
           </div>
 
+          {/* Technologies */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4 text-dark-800 dark:text-white">Technologies</h4>
+            <ul className="space-y-2">
+              {technologies.map((tech, index) => (
+                <li
+                  key={index}
+                  className="text-dark-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                >
+                  {tech}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Quick Links */}
           <div>
             <h4 className="text-lg font-semibold mb-4 text-dark-800 dark:text-white">Quick Links</h4>
             <ul className="space-y-2">
@@ -68,6 +94,7 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Contact */}
           <div>
             <h4 className="text-lg font-semibold mb-4 text-dark-800 dark:text-white">Contact</h4>
             <p className="text-dark-600 dark:text-gray-300 mb-2">
@@ -82,6 +109,7 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Copyright */}
         <div className="border-t border-gray-200 dark:border-dark-700 mt-8 pt-8 text-center text-dark-600 dark:text-gray-300">
           <p>&copy; {currentYear} Chandan Mee. All rights reserved.</p>
         </div>
