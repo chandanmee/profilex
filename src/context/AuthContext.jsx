@@ -1,47 +1,124 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { loginUser, getCurrentUser, logoutUser } from '../api/auth.js';
+import { getAuthToken, setAuthToken, removeAuthToken, isAuthenticated as checkAuthToken } from '../api/config.js';
 
 const AuthContext = createContext();
 
-export const useAuth = () => useContext(AuthContext);
+const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
 
-export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Check if user is already logged in on component mount
+  // Check authentication status on app load
   useEffect(() => {
-    const checkAuth = () => {
-      const token = localStorage.getItem('auth_token');
-      if (token) {
-        setIsAuthenticated(true);
+    const initializeAuth = async () => {
+      try {
+        const token = getAuthToken();
+        if (token && checkAuthToken()) {
+          // Verify token with backend and get user data
+          const userData = await getCurrentUser();
+          setUser(userData.data);
+          setIsAuthenticated(true);
+        } else {
+          // Clear invalid token
+          removeAuthToken();
+          setUser(null);
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        console.error('Error initializing auth:', error);
+        // Clear invalid token on error
+        removeAuthToken();
+        setUser(null);
+        setIsAuthenticated(false);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
 
-    checkAuth();
+    initializeAuth();
   }, []);
 
-  // Login function
-  const login = (username, password) => {
-    // In a real app, you would validate credentials against your backend
-    // For demo purposes, we'll use hardcoded credentials
-    if (username === 'admin' && password === 'password123') {
-      localStorage.setItem('auth_token', 'demo_token');
-      setIsAuthenticated(true);
-      return true;
+  const login = async (email, password) => {
+    console.log('=== AuthContext login called ===');
+    console.log('Login parameters:', { email, password: password ? '***' : 'empty' });
+    
+    setIsLoading(true);
+    try {
+      const response = await loginUser({ email, password });
+      console.log('=== AuthContext login response ===', response);
+      
+      if (response.success) {
+        console.log('Login successful, storing token and fetching user data...');
+        // Store token - backend returns token directly in response, not in response.data
+        setAuthToken(response.token);
+        
+        // Get user data
+        const userData = await getCurrentUser();
+        console.log('User data fetched:', userData);
+        setUser(userData.data);
+        setIsAuthenticated(true);
+        
+        console.log('Authentication state updated successfully');
+        
+        // Small delay to ensure state is updated
+        await new Promise(resolve => setTimeout(resolve, 50));
+        
+        return { success: true };
+      } else {
+        console.log('Login failed in AuthContext:', response.message);
+        return { 
+          success: false, 
+          message: response.message || 'Login failed' 
+        };
+      }
+    } catch (error) {
+      console.error('=== AuthContext login error ===', error);
+      return { 
+        success: false, 
+        message: error.message || 'Login failed. Please check your credentials.' 
+      };
+    } finally {
+      setIsLoading(false);
+      console.log('=== AuthContext login finished, isLoading set to false ===');
     }
-    return false;
   };
 
-  // Logout function
-  const logout = () => {
-    localStorage.removeItem('auth_token');
-    setIsAuthenticated(false);
+  const logout = async () => {
+    try {
+      // Call backend logout (optional - mainly for logging/analytics)
+      await logoutUser();
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      // Clear local state regardless of backend response
+      removeAuthToken();
+      setUser(null);
+      setIsAuthenticated(false);
+    }
+  };
+
+  const value = {
+    user,
+    isAuthenticated,
+    isLoading,
+    login,
+    logout,
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, isLoading, login, logout }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+export { useAuth, AuthProvider };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAllBlogs, createBlog, updateBlog, deleteBlog } from '../../api/blog';
+import { getAllBlogs, createBlog, updateBlog, deleteBlog } from '../../api/blog.js';
 import { FiEdit, FiTrash2, FiPlus, FiX } from 'react-icons/fi';
 
 const AdminBlog = () => {
@@ -105,8 +105,25 @@ const AdminBlog = () => {
       fetchBlogs();
       setShowForm(false);
       resetForm();
+      setError(null);
     } catch (err) {
-      setError('Failed to save blog post. Please try again.');
+      console.error('Error saving blog:', err);
+      setError(err.response?.data?.message || 'Failed to save blog post. Please try again.');
+    }
+  };
+
+  // Handle quick status change
+  const handleStatusChange = async (blogId, newStatus) => {
+    try {
+      const blog = blogs.find(b => b._id === blogId);
+      if (!blog) return;
+
+      await updateBlog(blogId, { ...blog, status: newStatus });
+      fetchBlogs();
+      setError(null);
+    } catch (err) {
+      console.error('Error updating blog status:', err);
+      setError('Failed to update blog status. Please try again.');
     }
   };
 
@@ -266,9 +283,28 @@ const AdminBlog = () => {
                     <div className="text-sm text-gray-500 dark:text-gray-300">{blog.category}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${blog.status === 'published' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
-                      {blog.status || 'draft'}
-                    </span>
+                    <div className="flex items-center">
+                      <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${blog.status === 'published' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                        {blog.status || 'draft'}
+                      </span>
+                      {blog.status === 'draft' ? (
+                        <button
+                          onClick={() => handleStatusChange(blog._id, 'published')}
+                          className="ml-2 text-xs bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded"
+                          title="Publish"
+                        >
+                          Publish
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleStatusChange(blog._id, 'draft')}
+                          className="ml-2 text-xs bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded"
+                          title="Unpublish"
+                        >
+                          Unpublish
+                        </button>
+                      )}
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-500 dark:text-gray-300">

@@ -11,6 +11,30 @@ const Blog = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Helper function to truncate text
+  const truncateText = (text, maxLength = 120) => {
+    if (!text) return '';
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength).trim() + '...';
+  };
+
+  // Helper function to format date
+  const formatDate = (dateString) => {
+    if (!dateString) return 'Unknown date';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric' 
+    });
+  };
+
+  // Helper function to get image URL
+  const getImageUrl = (post) => {
+    // Check for featuredImage first (from API), then fallback to image (from sample data)
+    return post.featuredImage || post.image || '/api/placeholder/400/300';
+  };
+
   // Fetch blog posts from API
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -207,36 +231,40 @@ const Blog = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredPosts.map((post, index) => (
                 <motion.article
-                  key={post.id}
+                  key={post._id || post.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 * index }}
-                  className="card overflow-hidden group h-full flex flex-col"
+                  className="card overflow-hidden group h-full flex flex-col cursor-pointer"
+                  onClick={() => window.location.href = `/blog/${post.slug || post.id}`}
                 >
                   <div className="relative overflow-hidden">
                     <img
-                      src={post.image}
+                      src={getImageUrl(post)}
                       alt={post.title}
                       className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                      onError={(e) => {
+                        e.target.src = '/api/placeholder/400/300';
+                      }}
                     />
                   </div>
                   <div className="p-6 flex-grow flex flex-col">
                     <div className="flex items-center text-sm text-dark-500 dark:text-gray-400 mb-3">
                       <span className="flex items-center mr-4">
-                        <FiCalendar className="mr-1" /> {post.date}
+                        <FiCalendar className="mr-1" /> {formatDate(post.publishedAt || post.createdAt || post.date)}
                       </span>
                       <span className="flex items-center">
-                        <FiUser className="mr-1" /> {post.author}
+                        <FiUser className="mr-1" /> {post.author?.name || post.author || 'Chandan'}
                       </span>
                     </div>
-                    <h2 className="text-xl font-bold text-dark-900 dark:text-white mb-3">
+                    <h2 className="text-xl font-bold text-dark-900 dark:text-white mb-3 line-clamp-2">
                       {post.title}
                     </h2>
-                    <p className="text-dark-600 dark:text-gray-300 mb-4 flex-grow">
-                      {post.excerpt}
+                    <p className="text-dark-600 dark:text-gray-300 mb-4 flex-grow line-clamp-3">
+                      {truncateText(post.excerpt)}
                     </p>
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {post.tags.map((tag) => (
+                      {(post.tags || []).slice(0, 3).map((tag) => (
                         <span
                           key={tag}
                           className="flex items-center text-xs font-medium px-2.5 py-0.5 rounded-full bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-300"
@@ -244,10 +272,16 @@ const Blog = () => {
                           <FiTag className="mr-1" /> {tag}
                         </span>
                       ))}
+                      {(post.tags || []).length > 3 && (
+                        <span className="text-xs text-dark-500 dark:text-gray-400">
+                          +{post.tags.length - 3} more
+                        </span>
+                      )}
                     </div>
                     <Link
-                      to={`/blog/${post.id}`}
+                      to={`/blog/${post.slug || post.id}`}
                       className="text-primary-600 dark:text-primary-400 font-medium hover:underline flex items-center"
+                      onClick={(e) => e.stopPropagation()}
                     >
                       Read More <FiArrowRight className="ml-1" />
                     </Link>

@@ -1,8 +1,17 @@
-# Chandan Portfolio Website
+# Chandan Portfolio
 
-A modern, responsive portfolio website built with React, Vite, and Tailwind CSS. Features a sleek design with dark/light mode support, smooth animations, and a comprehensive showcase of skills, projects, and professional experience.
+A modern, full-stack portfolio website built with the MERN stack (MongoDB, Express.js, React, Node.js). Features a sleek design with dark/light mode support, smooth animations, admin dashboard for content management, and a comprehensive showcase of skills, projects, and professional experience.
 
 ## 🚀 Features
+
+### Backend Features
+- **RESTful API**: Express.js server with comprehensive endpoints
+- **MongoDB Database**: NoSQL database with Mongoose ODM
+- **JWT Authentication**: Secure admin authentication system
+- **Error Handling**: Centralized error handling with Winston logging
+- **Input Validation**: Request validation and sanitization
+- **Rate Limiting**: Protection against API abuse
+- **CORS Configuration**: Cross-origin resource sharing setup
 
 ### Core Features
 - **Responsive Design**: Fully responsive across all devices and screen sizes
@@ -35,6 +44,18 @@ A modern, responsive portfolio website built with React, Vite, and Tailwind CSS.
 
 ## 🛠️ Tech Stack
 
+### Backend
+- **Node.js** - Runtime environment
+- **Express.js** - Web framework
+- **MongoDB** - NoSQL database
+- **Mongoose** - MongoDB object modeling
+- **JWT** - Authentication tokens
+- **bcryptjs** - Password hashing
+- **Winston** - Logging library
+- **express-rate-limit** - Rate limiting
+- **helmet** - Security headers
+- **cors** - Cross-origin resource sharing
+
 ### Frontend
 - **React 19.1.1** - Modern React with latest features
 - **Vite 7.0.6** - Next-generation frontend tooling
@@ -60,11 +81,22 @@ A modern, responsive portfolio website built with React, Vite, and Tailwind CSS.
 
 ```
 chandan-portfolio/
+├── server/                     # Backend application
+│   ├── controllers/           # Route controllers
+│   ├── middleware/            # Custom middleware
+│   ├── models/               # Database models
+│   ├── routes/               # API routes
+│   ├── utils/                # Utility functions
+│   ├── docs/                 # API documentation
+│   ├── scripts/              # Utility scripts
+│   └── server.js             # Entry point
 ├── public/                     # Static assets
 ├── src/
 │   ├── api/                   # API integration
+│   │   ├── auth.js           # Authentication API
 │   │   ├── blog.js           # Blog API endpoints
-│   │   └── contact.js        # Contact form API
+│   │   ├── contact.js        # Contact form API
+│   │   └── config.js         # API configuration
 │   ├── assets/               # Images and static files
 │   │   ├── chandan_mee.png   # Profile images
 │   │   ├── chandan_mee_lt.png
@@ -87,7 +119,7 @@ chandan-portfolio/
 │   │       ├── MissionVision.jsx
 │   │       ├── ClientSection.jsx
 │   │       └── AchievementSection.jsx
-│   ├── context/              # React Context
+│   ├── contexts/              # React Context
 │   │   ├── AuthContext.jsx   # Authentication state
 │   │   └── ThemeContext.jsx  # Theme management
 │   ├── pages/                # Main pages
@@ -99,6 +131,9 @@ chandan-portfolio/
 │   │   ├── BlogPost.jsx      # Individual blog post
 │   │   ├── AdminBlog.jsx     # Blog admin panel
 │   │   └── Login.jsx         # Admin login
+│   ├── utils/                # Frontend utilities
+│   │   ├── errorHandler.js   # Error handling utilities
+│   │   └── logger.js         # Frontend logging
 │   ├── App.jsx               # Main app component
 │   ├── main.jsx              # App entry point
 │   └── index.css             # Global styles
@@ -116,6 +151,7 @@ chandan-portfolio/
 ### Prerequisites
 - Node.js (version 16 or higher)
 - npm or yarn package manager
+- MongoDB (local installation or MongoDB Atlas)
 
 ### Installation
 
@@ -125,21 +161,56 @@ chandan-portfolio/
    cd chandan-portfolio
    ```
 
-2. **Install dependencies**
+2. **Backend Setup**
    ```bash
+   # Navigate to server directory
+   cd server
+   
+   # Install dependencies
    npm install
-   ```
-
-3. **Start the development server**
-   ```bash
+   
+   # Create environment file
+   cp .env.example .env
+   
+   # Edit .env with your configuration
+   # Required variables:
+   # - MONGODB_URI
+   # - JWT_SECRET
+   # - ADMIN_EMAIL
+   # - ADMIN_PASSWORD
+   
+   # Create admin user (first time only)
+   npm run create-admin
+   
+   # Start development server
    npm run dev
    ```
+   
+   The backend server will start on `http://localhost:5000`
 
-4. **Open your browser**
-   Navigate to `http://localhost:3000` to view the application
+3. **Frontend Setup**
+   ```bash
+   # Navigate back to project root
+   cd ../
+   
+   # Install dependencies
+   npm install
+   
+   # Start development server
+   npm run dev
+   ```
+   
+   The frontend application will start on `http://localhost:3001`
 
 ### Available Scripts
 
+#### Backend (`server/`)
+- `npm run dev` - Start development server with nodemon
+- `npm start` - Start production server
+- `npm test` - Run tests
+- `npm run create-admin` - Create admin user
+
+#### Frontend
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build locally
@@ -170,17 +241,41 @@ colors: {
 
 ## 🔧 Configuration
 
-### Vite Configuration
-- **Port**: 3000
-- **Host**: 0.0.0.0 (accessible on local network)
-- **Auto-open**: Browser opens automatically
-- **Path Aliases**: `@assets` for asset imports
+### Backend Environment Variables
 
-### Environment Setup
-Create a `.env` file for environment variables:
+Create a `.env` file in the `server` directory:
+
 ```env
-VITE_API_BASE_URL=your_api_url
-VITE_CONTACT_API=your_contact_api
+# Server Configuration
+PORT=5000
+NODE_ENV=development
+
+# Database
+MONGODB_URI=mongodb://localhost:27017/chandan-portfolio
+
+# JWT Configuration
+JWT_SECRET=your-super-secret-jwt-key-here
+JWT_EXPIRES_IN=7d
+
+# Admin User
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=your-secure-password
+
+# CORS
+FRONTEND_URL=http://localhost:3001
+
+# Email Configuration (Optional)
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASS=your-app-password
+```
+
+### Frontend Configuration
+
+Update `src/api/config.js` if needed:
+```javascript
+export const API_BASE_URL = 'http://localhost:5000/api';
 ```
 
 ## 📱 Responsive Design
@@ -191,7 +286,39 @@ The website is fully responsive with breakpoints:
 - **Desktop**: > 1024px
 - **Large Desktop**: > 1280px
 
+## 🔐 Authentication
+
+The application uses JWT-based authentication:
+
+1. **Admin Login**: Use the credentials set in your `.env` file
+2. **Token Storage**: Tokens are stored in localStorage
+3. **Protected Routes**: Admin routes require authentication
+4. **Token Expiry**: Tokens expire based on `JWT_EXPIRES_IN` setting
+
+### Default Admin Credentials
+
+After running `npm run create-admin`, use:
+- **Email**: Value from `ADMIN_EMAIL` in `.env`
+- **Password**: Value from `ADMIN_PASSWORD` in `.env`
+
+## 📚 API Documentation
+
+Comprehensive API documentation is available at `server/docs/API.md`. It includes:
+
+- Authentication endpoints
+- Blog management endpoints
+- Contact form endpoints
+- Request/response examples
+- Error codes and handling
+- Rate limiting information
+
 ## 🌟 Key Features Explained
+
+### Full-Stack Architecture
+- **Backend API**: RESTful API with Express.js and MongoDB
+- **Frontend SPA**: React application with modern hooks and context
+- **Real-time Integration**: Seamless frontend-backend communication
+- **Error Handling**: Comprehensive error handling on both ends
 
 ### Authentication System
 - JWT-based authentication for admin access
