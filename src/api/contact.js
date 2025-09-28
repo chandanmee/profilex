@@ -1,39 +1,91 @@
+import { API_ENDPOINTS, apiRequest } from './config.js';
+import logger from '../utils/logger.js';
+import { withErrorHandling } from '../utils/errorHandler.js';
+
 /**
  * Contact API service
- * This file contains functions to interact with the backend contact API
  */
 
-// Base API URL - would typically come from environment variables
-const API_URL = 'http://localhost:5000/api';
+// Submit contact form
+export const submitContactForm = withErrorHandling(async (contactData) => {
+  logger.info('Submitting contact form', { name: contactData.name, email: contactData.email });
+  
+  const response = await apiRequest(API_ENDPOINTS.contact.base, {
+    method: 'POST',
+    body: JSON.stringify(contactData)
+  });
+  
+  logger.info('Contact form submitted successfully', { name: contactData.name });
+  return response;
+});
 
-/**
- * Submit a contact form to the backend
- * @param {Object} contactData - Contact form data
- * @param {string} contactData.name - Name of the person
- * @param {string} contactData.email - Email address
- * @param {string} contactData.subject - Subject of the message
- * @param {string} contactData.message - Message content
- * @returns {Promise} - Promise with the response data
- */
-export const submitContactForm = async (contactData) => {
-  try {
-    const response = await fetch(`${API_URL}/contact`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(contactData),
-    });
+// Get all contacts (admin only)
+export const getAllContacts = withErrorHandling(async (params = {}) => {
+  logger.debug('Fetching all contacts', params);
+  
+  const queryString = new URLSearchParams(params).toString();
+  const url = queryString ? `${API_ENDPOINTS.contact.base}?${queryString}` : API_ENDPOINTS.contact.base;
+  
+  const response = await apiRequest(url);
+  
+  logger.debug('All contacts fetched successfully', { count: response.data?.length });
+  return response;
+});
 
-    const data = await response.json();
+// Get contact by ID (admin only)
+export const getContactById = withErrorHandling(async (id) => {
+  logger.debug('Fetching contact by ID', { id });
+  
+  const response = await apiRequest(`${API_ENDPOINTS.contact.base}/${id}`);
+  
+  logger.debug('Contact fetched successfully', { id, name: response.data?.name });
+  return response;
+});
 
-    if (!response.ok) {
-      throw new Error(data.message || 'Failed to submit contact form');
-    }
+// Update contact status (admin only)
+export const updateContactStatus = withErrorHandling(async (id, status) => {
+  logger.info('Updating contact status', { id, status });
+  
+  const response = await apiRequest(`${API_ENDPOINTS.contact.base}/${id}/status`, {
+    method: 'PUT',
+    body: JSON.stringify({ status })
+  });
+  
+  logger.info('Contact status updated successfully', { id, status });
+  return response;
+});
 
-    return data;
-  } catch (error) {
-    console.error('Error submitting contact form:', error);
-    throw error;
-  }
-};
+// Delete contact (admin only)
+export const deleteContact = withErrorHandling(async (id) => {
+  logger.warn('Deleting contact', { id });
+  
+  const response = await apiRequest(`${API_ENDPOINTS.contact.base}/${id}`, {
+    method: 'DELETE'
+  });
+  
+  logger.warn('Contact deleted successfully', { id });
+  return response;
+});
+
+// Bulk mark contacts as read (admin only)
+export const bulkMarkAsRead = withErrorHandling(async (contactIds) => {
+  logger.info('Bulk marking contacts as read', { count: contactIds.length });
+  
+  const response = await apiRequest(`${API_ENDPOINTS.contact.base}/bulk/mark-read`, {
+    method: 'PUT',
+    body: JSON.stringify({ contactIds })
+  });
+  
+  logger.info('Contacts marked as read successfully', { count: contactIds.length });
+  return response;
+});
+
+// Get contact statistics (admin only)
+export const getContactStats = withErrorHandling(async () => {
+  logger.debug('Fetching contact statistics');
+  
+  const response = await apiRequest(`${API_ENDPOINTS.contact.base}/stats`);
+  
+  logger.debug('Contact statistics fetched successfully');
+  return response;
+});

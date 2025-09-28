@@ -14,6 +14,7 @@ import {
   FiPlus,
   FiSettings
 } from 'react-icons/fi';
+import { getDashboardStats } from '../../api/blog.js';
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
@@ -24,6 +25,9 @@ const AdminDashboard = () => {
     totalViews: 0,
     mediaFiles: 0
   });
+  const [recentActivity, setRecentActivity] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Fetch dashboard stats
@@ -32,17 +36,30 @@ const AdminDashboard = () => {
 
   const fetchDashboardStats = async () => {
     try {
-      // Mock data for now - replace with actual API calls
-      setStats({
-        totalBlogs: 12,
-        publishedBlogs: 8,
-        draftBlogs: 4,
-        knowledgeEntries: 25,
-        totalViews: 1250,
-        mediaFiles: 45
-      });
+      setLoading(true);
+      const response = await getDashboardStats();
+      
+      if (response.success) {
+        setStats(response.data.stats);
+        setRecentActivity(response.data.recentActivity || []);
+      } else {
+        throw new Error(response.message || 'Failed to fetch dashboard stats');
+      }
     } catch (error) {
       console.error('Error fetching dashboard stats:', error);
+      setError('Failed to load dashboard statistics');
+      // Keep dummy data as fallback
+      setStats({
+        totalBlogs: 0,
+        publishedBlogs: 0,
+        draftBlogs: 0,
+        knowledgeEntries: 0,
+        totalViews: 0,
+        mediaFiles: 0
+      });
+      setRecentActivity([]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -108,12 +125,21 @@ const AdminDashboard = () => {
     }
   ];
 
-  const recentActivity = [
-    { type: 'blog', title: 'React Best Practices', action: 'Published', time: '2 hours ago' },
-    { type: 'knowledge', title: 'API Documentation Tools', action: 'Created', time: '1 day ago' },
-    { type: 'blog', title: 'JavaScript ES2024 Features', action: 'Saved as Draft', time: '2 days ago' },
-    { type: 'media', title: 'hero-image.jpg', action: 'Uploaded', time: '3 days ago' }
+  // Use real recent activity data if available, otherwise show empty state
+  const displayRecentActivity = recentActivity.length > 0 ? recentActivity : [
+    { type: 'blog', title: 'No recent activity', action: 'Create your first blog post', time: 'Get started' }
   ];
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20 pb-8 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">Loading dashboard...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20 pb-8">
@@ -131,6 +157,11 @@ const AdminDashboard = () => {
           <p className="text-sm text-gray-600 dark:text-gray-400">
             Welcome back! Here's what's happening with your content.
           </p>
+          {error && (
+            <div className="mt-2 p-2 bg-yellow-100 border border-yellow-400 text-yellow-700 rounded text-sm">
+              {error} - Showing fallback data
+            </div>
+          )}
         </motion.div>
 
         {/* Stats Overview */}
@@ -252,7 +283,7 @@ const AdminDashboard = () => {
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Recent Activity</h2>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700">
               <div className="space-y-3">
-                {recentActivity.map((activity, index) => (
+                {displayRecentActivity.map((activity, index) => (
                   <div key={index} className="flex items-start space-x-3">
                     <div className={`p-2 rounded-lg ${
                       activity.type === 'blog' ? 'bg-primary-100 dark:bg-primary-900' :
@@ -271,10 +302,13 @@ const AdminDashboard = () => {
                         <FiImage className="w-3 h-3 text-blue-600 dark:text-blue-400" />
                       )}
                     </div>
-                    <div className="flex-1">
-                      <p className="text-xs font-medium text-gray-900 dark:text-white">{activity.title}</p>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">{activity.action}</p>
-                      <p className="text-xs text-gray-500 dark:text-gray-500">{activity.time}</p>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                        {activity.title}
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                        {activity.action} • {activity.time}
+                      </p>
                     </div>
                   </div>
                 ))}

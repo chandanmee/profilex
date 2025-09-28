@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiMapPin, FiSend, FiGithub, FiLinkedin, FiTwitter, FiAlertCircle } from 'react-icons/fi';
-import { submitContactForm } from '../api/contact';
+import { submitContactForm } from '../api/contact.js';
 
 const Contact = () => {
   const [formData, setFormData] = useState({

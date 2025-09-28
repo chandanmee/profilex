@@ -1,61 +1,74 @@
 import React, { useState, useEffect } from 'react';
-import { getBlogById, getRelatedBlogs } from '../../api/blog';
+import { getBlogById, getBlogBySlug, getRelatedBlogs } from '../../api/blog';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FiArrowLeft, FiCalendar, FiUser, FiTag, FiShare2, FiMessageSquare } from 'react-icons/fi';
+import { FiArrowLeft, FiCalendar, FiUser, FiTag, FiShare2, FiMessageSquare, FiTwitter, FiLinkedin, FiGithub } from 'react-icons/fi';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 // This would typically come from an API or CMS
 const blogPostsData = [
   {
     id: 1,
+    slug: 'future-of-web-development-trends-2023',
     title: 'The Future of Web Development: Trends to Watch in 2023',
-    content: `
-      <p>The web development landscape is constantly evolving, with new technologies, frameworks, and methodologies emerging at a rapid pace. As we move through 2023, several key trends are shaping the future of how we build and interact with websites and web applications.</p>
-      
-      <h2>AI-Driven Development Tools</h2>
-      <p>Artificial intelligence is revolutionizing the way developers work. AI-powered code completion tools like GitHub Copilot are becoming increasingly sophisticated, helping developers write code faster and with fewer errors. These tools can suggest entire functions based on comments, automate repetitive tasks, and even help identify potential bugs before they make it into production.</p>
-      <p>Beyond code completion, AI is also being used for:</p>
-      <ul>
-        <li>Automated testing and quality assurance</li>
-        <li>Performance optimization</li>
-        <li>User experience personalization</li>
-        <li>Accessibility improvements</li>
-      </ul>
-      
-      <h2>WebAssembly (WASM) Goes Mainstream</h2>
-      <p>WebAssembly continues to gain traction as a powerful technology that allows high-performance code written in languages like C++, Rust, and Go to run in the browser. This opens up new possibilities for web applications that require intensive computation, such as:</p>
-      <ul>
-        <li>Browser-based video editing</li>
-        <li>Complex data visualization</li>
-        <li>Advanced gaming experiences</li>
-        <li>Scientific simulations</li>
-      </ul>
-      <p>As WebAssembly matures, we're seeing more tools and frameworks that make it accessible to a broader range of developers, not just those with systems programming backgrounds.</p>
-      
-      <h2>The Rise of Edge Computing</h2>
-      <p>Edge computing is changing how web applications are deployed and delivered. By running code closer to users at the network edge rather than in centralized data centers, developers can create experiences that are:</p>
-      <ul>
-        <li>Faster, with reduced latency</li>
-        <li>More reliable, even with spotty internet connections</li>
-        <li>More secure, with distributed points of failure</li>
-        <li>More cost-effective for certain workloads</li>
-      </ul>
-      <p>Platforms like Cloudflare Workers, Vercel Edge Functions, and Netlify Edge are making it easier than ever to deploy code to the edge without managing complex infrastructure.</p>
-      
-      <h2>Micro-Frontends Architecture</h2>
-      <p>As web applications grow in complexity, more teams are adopting micro-frontends architecture. This approach extends microservices principles to frontend development, allowing different teams to work on separate parts of an application independently using different technologies if needed.</p>
-      <p>Benefits of micro-frontends include:</p>
-      <ul>
-        <li>Improved team autonomy and productivity</li>
-        <li>More manageable codebases</li>
-        <li>Ability to update parts of an application without rebuilding everything</li>
-        <li>Better scaling for large organizations</li>
-      </ul>
-      
-      <h2>Conclusion</h2>
-      <p>The web development field continues to evolve at a breathtaking pace. By staying informed about these trends and selectively adopting technologies that solve real problems for your projects, you can build better web experiences and keep your skills relevant in an ever-changing landscape.</p>
-      <p>What trends are you most excited about? Are there others you think will have a significant impact on web development in the coming years? The conversation is just beginning.</p>
-    `,
+    content: `# The Future of Web Development: Trends to Watch in 2023
+
+The web development landscape is constantly evolving, with new technologies, frameworks, and methodologies emerging at a rapid pace. As we move through 2023, several key trends are shaping the future of how we build and interact with websites and web applications.
+
+## AI-Driven Development Tools
+
+Artificial intelligence is revolutionizing the way developers work. AI-powered code completion tools like **GitHub Copilot** are becoming increasingly sophisticated, helping developers write code faster and with fewer errors. These tools can suggest entire functions based on comments, automate repetitive tasks, and even help identify potential bugs before they make it into production.
+
+Beyond code completion, AI is also being used for:
+
+- Automated testing and quality assurance
+- Performance optimization
+- User experience personalization
+- Accessibility improvements
+
+## WebAssembly (WASM) Goes Mainstream
+
+WebAssembly continues to gain traction as a powerful technology that allows high-performance code written in languages like **C++**, **Rust**, and **Go** to run in the browser. This opens up new possibilities for web applications that require intensive computation, such as:
+
+- Browser-based video editing
+- Complex data visualization
+- Advanced gaming experiences
+- Scientific simulations
+
+As WebAssembly matures, we're seeing more tools and frameworks that make it accessible to a broader range of developers, not just those with systems programming backgrounds.
+
+## The Rise of Edge Computing
+
+Edge computing is changing how web applications are deployed and delivered. By running code closer to users at the network edge rather than in centralized data centers, developers can create experiences that are:
+
+- **Faster**, with reduced latency
+- **More reliable**, even with spotty internet connections
+- **More secure**, with distributed points of failure
+- **More cost-effective** for certain workloads
+
+Platforms like *Cloudflare Workers*, *Vercel Edge Functions*, and *Netlify Edge* are making it easier than ever to deploy code to the edge without managing complex infrastructure.
+
+## Micro-Frontends Architecture
+
+As web applications grow in complexity, more teams are adopting micro-frontends architecture. This approach extends microservices principles to frontend development, allowing different teams to work on separate parts of an application independently using different technologies if needed.
+
+Benefits of micro-frontends include:
+
+1. **Improved team autonomy** and productivity
+2. More **manageable codebases**
+3. Ability to update parts of an application without rebuilding everything
+4. Better scaling for large organizations
+
+> "The future of web development lies in modular, scalable architectures that can adapt to changing requirements." - Industry Expert
+
+## Conclusion
+
+The web development field continues to evolve at a breathtaking pace. By staying informed about these trends and selectively adopting technologies that solve real problems for your projects, you can build better web experiences and keep your skills relevant in an ever-changing landscape.
+
+**What trends are you most excited about?** Are there others you think will have a significant impact on web development in the coming years? The conversation is just beginning.
+
+*Tags: #WebDevelopment #Trends #AI #WebAssembly #EdgeComputing*`,
     date: 'June 15, 2023',
     author: 'Chandan Mee',
     category: 'web-development',
@@ -66,6 +79,7 @@ const blogPostsData = [
   },
   {
     id: 2,
+    slug: 'optimizing-website-performance-guide',
     title: 'Optimizing Website Performance: A Comprehensive Guide',
     content: `
       <p>Website performance is a critical factor in user experience, SEO rankings, and conversion rates. In today's fast-paced digital world, users expect websites to load quickly and respond immediately to their interactions. This comprehensive guide explores practical strategies to optimize your website's performance.</p>
@@ -162,6 +176,7 @@ const blogPostsData = [
   },
   {
     id: 3,
+    slug: 'designing-for-accessibility-best-practices',
     title: 'Designing for Accessibility: Best Practices for Inclusive Web Design',
     content: `
       <p>Web accessibility is about creating websites that can be used by everyone, including people with disabilities. Designing with accessibility in mind not only helps you reach a wider audience but also often results in better usability for all users. This article explores key principles and practical techniques for creating more inclusive web experiences.</p>
@@ -855,7 +870,7 @@ Sitemap: https://example.com/sitemap.xml
 ];
 
 const BlogPost = () => {
-  const { id } = useParams();
+  const { id, slug } = useParams();
   const [post, setPost] = useState(null);
   const [relatedPosts, setRelatedPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -865,12 +880,24 @@ const BlogPost = () => {
     const fetchBlogPost = async () => {
       try {
         setLoading(true);
-        // Fetch the blog post
-        const response = await getBlogById(id);
+        let response;
+        
+        // Determine if we're using slug or ID based routing
+        if (slug) {
+          // Fetch by slug
+          response = await getBlogBySlug(slug);
+        } else if (id) {
+          // Fetch by ID
+          response = await getBlogById(id);
+        } else {
+          throw new Error('No blog identifier provided');
+        }
+        
         setPost(response.data);
         
-        // Fetch related posts
-        const relatedResponse = await getRelatedBlogs(id);
+        // Fetch related posts using the blog ID
+        const blogId = response.data._id || response.data.id;
+        const relatedResponse = await getRelatedBlogs(blogId);
         setRelatedPosts(relatedResponse.data);
         
         setError(null);
@@ -879,14 +906,24 @@ const BlogPost = () => {
         setError('Failed to load the blog post. Please try again later.');
         
         // Fallback to sample data if API fails
-        const postId = parseInt(id);
-        const foundPost = blogPostsData.find(post => post.id === postId);
+        const identifier = slug || id;
+        let foundPost;
+        
+        if (slug) {
+          // Try to find by slug in sample data
+          foundPost = blogPostsData.find(post => post.slug === slug);
+        } else if (id) {
+          // Try to find by ID in sample data
+          const postId = parseInt(id);
+          foundPost = blogPostsData.find(post => post.id === postId);
+        }
+        
         if (foundPost) {
           setPost(foundPost);
           
           // Get related posts from sample data
           const sampleRelatedPosts = blogPostsData
-            .filter(p => p.id !== postId && (p.category === foundPost.category || p.tags.some(tag => foundPost.tags.includes(tag))))
+            .filter(p => p.id !== foundPost.id && (p.category === foundPost.category || p.tags.some(tag => foundPost.tags.includes(tag))))
             .slice(0, 3);
           setRelatedPosts(sampleRelatedPosts);
         }
@@ -898,10 +935,10 @@ const BlogPost = () => {
     // Scroll to top on page load
     window.scrollTo(0, 0);
     
-    if (id) {
+    if (id || slug) {
       fetchBlogPost();
     }
-  }, [id]);
+  }, [id, slug]);
   
   // Loading state
   if (loading) {
@@ -990,12 +1027,15 @@ const BlogPost = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="rounded-xl overflow-hidden shadow-lg"
+            className="max-w-4xl mx-auto rounded-xl overflow-hidden shadow-lg"
           >
             <img 
-              src={post.image} 
+              src={post.image || post.featuredImage || '/api/placeholder/800/400'} 
               alt={post.title} 
               className="w-full h-auto md:h-[400px] object-cover"
+              onError={(e) => {
+                e.target.src = '/api/placeholder/800/400';
+              }}
             />
           </motion.div>
         </div>
@@ -1004,39 +1044,42 @@ const BlogPost = () => {
       {/* Blog Content */}
       <section className="py-16 bg-white dark:bg-dark-800">
         <div className="container">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="prose prose-lg dark:prose-invert max-w-none"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
+          <div className="max-w-3xl mx-auto">
+            <div className="prose prose-xl dark:prose-invert max-w-none prose-headings:font-bold prose-headings:text-dark-900 dark:prose-headings:text-white prose-p:text-dark-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-6 prose-li:text-dark-700 dark:prose-li:text-gray-300 prose-strong:text-dark-900 dark:prose-strong:text-white prose-code:text-primary-600 dark:prose-code:text-primary-400 prose-code:bg-gray-100 dark:prose-code:bg-dark-700 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-blockquote:border-l-4 prose-blockquote:border-primary-500 prose-blockquote:pl-6 prose-blockquote:italic prose-img:rounded-lg prose-img:shadow-md"
+                 style={{
+                   fontSize: '1.125rem',
+                   lineHeight: '1.75',
+                   letterSpacing: '0.01em'
+                 }}>
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {post.content}
+              </ReactMarkdown>
+            </div>
             
-            {/* Author Bio */}
+            {/* Author Bio - Smaller and more compact */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-16 p-8 bg-gray-50 dark:bg-dark-700 rounded-xl"
+              className="mt-12 p-6 bg-gray-50 dark:bg-dark-700 rounded-lg border-l-4 border-primary-500"
             >
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
-                <div className="w-24 h-24 rounded-full overflow-hidden bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 text-4xl font-bold">
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 rounded-full overflow-hidden bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 text-xl font-bold flex-shrink-0">
                   {post.author.split(' ').map(name => name[0]).join('')}
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-dark-900 dark:text-white mb-2">{post.author}</h3>
-                  <p className="text-dark-600 dark:text-gray-300 mb-4">
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-dark-900 dark:text-white mb-1">{post.author}</h3>
+                  <p className="text-sm text-dark-600 dark:text-gray-300 mb-3 leading-relaxed">
                     Web Developer & Digital Marketing Professional with a passion for creating efficient, user-friendly, and visually appealing web solutions.
                   </p>
-                  <div className="flex space-x-4">
-                    <a href="#" className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300">
+                  <div className="flex space-x-3">
+                    <a href="#" className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-lg">
                       <FiTwitter />
                     </a>
-                    <a href="#" className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300">
+                    <a href="#" className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-lg">
                       <FiLinkedin />
                     </a>
-                    <a href="#" className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300">
+                    <a href="#" className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-lg">
                       <FiGithub />
                     </a>
                   </div>
@@ -1104,7 +1147,8 @@ const BlogPost = () => {
         </section>
       )}
       
-      {/* Comments Section */}
+      {/* Comments Section - Hidden for now */}
+      {false && (
       <section className="py-16 bg-white dark:bg-dark-800">
         <div className="container">
           <div className="max-w-4xl mx-auto">
@@ -1202,6 +1246,7 @@ const BlogPost = () => {
           </div>
         </div>
       </section>
+      )}
     </>
   );
 };

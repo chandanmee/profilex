@@ -32,7 +32,8 @@ const App = () => {
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:id" element={<BlogPost />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/blog/id/:id" element={<BlogPost />} />
             <Route path="/login" element={<Login />} />
             <Route path="/admin/blog" element={
               <ProtectedRoute>
@@ -53,6 +54,16 @@ const App = () => {
             <Route path="/admin/blog-manager" element={
               <ProtectedRoute>
                 <BlogManager />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/blog/new" element={
+              <ProtectedRoute>
+                <BlogEditor />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/blog/edit/:id" element={
+              <ProtectedRoute>
+                <BlogEditor />
               </ProtectedRoute>
             } />
             <Route path="/admin/blog-editor" element={

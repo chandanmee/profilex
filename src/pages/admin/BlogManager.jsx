@@ -13,6 +13,7 @@ import {
   FiTag,
   FiMoreVertical
 } from 'react-icons/fi';
+import { getAllBlogs, deleteBlog, updateBlog } from '../../api/blog.js';
 
 const BlogManager = () => {
   const [blogs, setBlogs] = useState([]);
@@ -26,59 +27,49 @@ const BlogManager = () => {
   const [sortOrder, setSortOrder] = useState('desc');
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
   const [loading, setLoading] = useState(true);
-
-  // Mock data - replace with actual API calls
-  const mockBlogs = [
-    {
-      id: 1,
-      title: 'React Best Practices for 2024',
-      slug: 'react-best-practices-2024',
-      status: 'published',
-      tags: ['React', 'JavaScript', 'Best Practices'],
-      date: '2024-01-15',
-      views: 245,
-      excerpt: 'Learn the latest React best practices and patterns for building modern applications.'
-    },
-    {
-      id: 2,
-      title: 'Building Scalable Node.js Applications',
-      slug: 'building-scalable-nodejs-applications',
-      status: 'draft',
-      tags: ['Node.js', 'Backend', 'Scalability'],
-      date: '2024-01-10',
-      views: 0,
-      excerpt: 'A comprehensive guide to building scalable Node.js applications with proper architecture.'
-    },
-    {
-      id: 3,
-      title: 'CSS Grid vs Flexbox: When to Use What',
-      slug: 'css-grid-vs-flexbox',
-      status: 'published',
-      tags: ['CSS', 'Layout', 'Frontend'],
-      date: '2024-01-08',
-      views: 189,
-      excerpt: 'Understanding the differences between CSS Grid and Flexbox and when to use each.'
-    },
-    {
-      id: 4,
-      title: 'TypeScript Advanced Types',
-      slug: 'typescript-advanced-types',
-      status: 'draft',
-      tags: ['TypeScript', 'JavaScript', 'Types'],
-      date: '2024-01-05',
-      views: 0,
-      excerpt: 'Exploring advanced TypeScript types and their practical applications.'
-    }
-  ];
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Simulate API call
-    setTimeout(() => {
-      setBlogs(mockBlogs);
-      setFilteredBlogs(mockBlogs);
-      setLoading(false);
-    }, 1000);
+    fetchBlogs();
   }, []);
+
+  const fetchBlogs = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      // Fetch all blogs including drafts for admin view
+      const response = await getAllBlogs({ status: 'all' });
+      
+      if (response.success) {
+        const blogsData = response.data || [];
+        setBlogs(blogsData);
+        setFilteredBlogs(blogsData);
+      } else {
+        throw new Error(response.message || 'Failed to fetch blogs');
+      }
+    } catch (error) {
+      console.error('Error fetching blogs:', error);
+      setError('Failed to load blogs. Please try again.');
+      setBlogs([]);
+      setFilteredBlogs([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteBlog = async (id) => {
+    if (window.confirm('Are you sure you want to delete this blog post?')) {
+      try {
+        await deleteBlog(id);
+        // Refresh the blogs list
+        fetchBlogs();
+      } catch (error) {
+        console.error('Error deleting blog:', error);
+        setError('Failed to delete blog post. Please try again.');
+      }
+    }
+  };
 
   useEffect(() => {
     filterBlogs();
@@ -156,12 +147,22 @@ const BlogManager = () => {
 
   const handleStatusChange = async (blogId, newStatus) => {
     try {
-      // Update blog status - replace with actual API call
-      setBlogs(blogs.map(blog =>
-        blog.id === blogId ? { ...blog, status: newStatus } : blog
-      ));
+      const response = await updateBlog(blogId, { status: newStatus });
+      
+      if (response.success) {
+        // Update local state
+        setBlogs(blogs.map(blog =>
+          blog._id === blogId ? { ...blog, status: newStatus } : blog
+        ));
+        setFilteredBlogs(filteredBlogs.map(blog =>
+          blog._id === blogId ? { ...blog, status: newStatus } : blog
+        ));
+      } else {
+        throw new Error(response.message || 'Failed to update blog status');
+      }
     } catch (error) {
       console.error('Error updating blog status:', error);
+      setError('Failed to update blog status. Please try again.');
     }
   };
 
@@ -372,7 +373,22 @@ const BlogManager = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden"
         >
-          {filteredBlogs.length === 0 ? (
+          {loading ? (
+            <div className="p-8 text-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500 mx-auto"></div>
+              <p className="text-gray-500 dark:text-gray-400 mt-2">Loading blogs...</p>
+            </div>
+          ) : error ? (
+            <div className="p-8 text-center">
+              <p className="text-red-500 dark:text-red-400">{error}</p>
+              <button
+                onClick={fetchBlogs}
+                className="mt-2 px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors duration-200"
+              >
+                Retry
+              </button>
+            </div>
+          ) : filteredBlogs.length === 0 ? (
             <div className="p-8 text-center">
               <p className="text-gray-500 dark:text-gray-400">No blog posts found.</p>
             </div>
@@ -403,14 +419,14 @@ const BlogManager = () => {
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                   {filteredBlogs.map((blog) => (
-                    <tr key={blog.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <tr key={blog._id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                       <td className="px-6 py-4">
                         <div>
                           <h3 className="text-sm font-medium text-gray-900 dark:text-white">
                             {blog.title}
                           </h3>
                           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                            {blog.excerpt}
+                            {blog.excerpt || 'No excerpt available'}
                           </p>
                         </div>
                       </td>
@@ -418,7 +434,9 @@ const BlogManager = () => {
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                           blog.status === 'published'
                             ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                            : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                            : blog.status === 'draft'
+                            ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                            : 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200'
                         }`}>
                           {blog.status === 'published' ? <FiEye className="w-3 h-3 mr-1" /> : <FiEyeOff className="w-3 h-3 mr-1" />}
                           {blog.status}
@@ -426,16 +444,16 @@ const BlogManager = () => {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex flex-wrap gap-1">
-                          {blog.tags.slice(0, 2).map((tag) => (
+                          {(blog.tags || []).slice(0, 2).map((tag, index) => (
                             <span
-                              key={tag}
+                              key={index}
                               className="inline-flex items-center px-2 py-1 rounded-md text-xs bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200"
                             >
                               <FiTag className="w-3 h-3 mr-1" />
                               {tag}
                             </span>
                           ))}
-                          {blog.tags.length > 2 && (
+                          {(blog.tags || []).length > 2 && (
                             <span className="text-xs text-gray-500 dark:text-gray-400">
                               +{blog.tags.length - 2} more
                             </span>
@@ -445,28 +463,28 @@ const BlogManager = () => {
                       <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
                         <div className="flex items-center">
                           <FiCalendar className="w-4 h-4 mr-2" />
-                          {new Date(blog.date).toLocaleDateString()}
+                          {new Date(blog.createdAt || blog.date).toLocaleDateString()}
                         </div>
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
-                        {blog.views}
+                        {blog.views || 0}
                       </td>
                       <td className="px-6 py-4 text-right">
                         <div className="flex items-center justify-end space-x-2">
                           <Link
-                            to={`/admin/blog/edit/${blog.id}`}
+                            to={`/admin/blog/edit/${blog._id}`}
                             className="text-primary-600 hover:text-primary-900 dark:text-primary-400 dark:hover:text-primary-300"
                           >
                             <FiEdit3 className="w-4 h-4" />
                           </Link>
                           <button
-                            onClick={() => handleStatusChange(blog.id, blog.status === 'published' ? 'draft' : 'published')}
+                            onClick={() => handleStatusChange(blog._id, blog.status === 'published' ? 'draft' : 'published')}
                             className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
                           >
                             {blog.status === 'published' ? <FiEyeOff className="w-4 h-4" /> : <FiEye className="w-4 h-4" />}
                           </button>
                           <button
-                            onClick={() => handleDelete(blog.id)}
+                            onClick={() => handleDeleteBlog(blog._id)}
                             className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
                           >
                             <FiTrash2 className="w-4 h-4" />

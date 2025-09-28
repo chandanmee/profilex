@@ -2,39 +2,69 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
-import { FiLock, FiUser, FiAlertCircle } from 'react-icons/fi';
+import { FiLock, FiMail, FiAlertCircle, FiLoader } from 'react-icons/fi';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { login, isAuthenticated } = useAuth();
+  const [loginAttempted, setLoginAttempted] = useState(false);
+  const { login, isAuthenticated, isLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   // Get the redirect path from location state or default to admin/blog
   const from = location.state?.from?.pathname || '/admin/';
 
-  // If already authenticated, redirect to the intended page
+  // Only redirect if user is authenticated AND has attempted login
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate(from, { replace: true });
+    console.log('useEffect triggered:', { isAuthenticated, isLoading, loginAttempted, from });
+    
+    if (isAuthenticated && !isLoading && loginAttempted) {
+      console.log('Redirecting to:', from);
+      // Small delay to ensure authentication state is fully propagated
+      const timer = setTimeout(() => {
+        navigate(from, { replace: true });
+      }, 100);
+      
+      return () => clearTimeout(timer);
     }
-  }, [isAuthenticated, navigate, from]);
+  }, [isAuthenticated, isLoading, loginAttempted, navigate, from]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setLoginAttempted(true);
+    
+    console.log('=== LOGIN ATTEMPT START ===');
+    console.log('Form submitted with:', { email, password: password ? '***' : 'empty' });
 
-    if (!username || !password) {
-      setError('Please enter both username and password');
+    if (!email || !password) {
+      console.log('Validation failed: missing email or password');
+      setError('Please enter both email and password');
+      setLoginAttempted(false);
       return;
     }
 
-    const success = login(username, password);
-    if (!success) {
-      setError('Invalid username or password');
+    try {
+      console.log('Calling login function with credentials...');
+      const result = await login(email, password);
+      console.log('=== LOGIN RESULT ===', result);
+      
+      if (result.success) {
+        console.log('Login successful, waiting for redirect...');
+        // Don't navigate here, let useEffect handle it
+      } else {
+        console.log('Login failed:', result.message);
+        setError(result.message || 'Login failed');
+        setLoginAttempted(false);
+      }
+    } catch (error) {
+      console.log('=== LOGIN ERROR ===', error);
+      setError('An error occurred during login');
+      setLoginAttempted(false);
     }
+    console.log('=== LOGIN ATTEMPT END ===');
   };
 
   return (
@@ -58,20 +88,21 @@ const Login = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-gray-700 dark:text-gray-300 mb-2" htmlFor="username">
-              Username
+            <label className="block text-gray-700 dark:text-gray-300 mb-2" htmlFor="email">
+              Email
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FiUser className="text-gray-400" />
+                <FiMail className="text-gray-400" />
               </div>
               <input
-                type="text"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full pl-10 pr-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                placeholder="admin"
+                placeholder="admin@chandanmee.com"
+                disabled={isLoading}
               />
             </div>
           </div>
@@ -90,23 +121,32 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full pl-10 pr-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                placeholder="password123"
+                placeholder="Enter your password"
+                disabled={isLoading}
               />
             </div>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            disabled={isLoading}
+            className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 flex items-center justify-center"
           >
-            Log In
+            {isLoading ? (
+              <>
+                <FiLoader className="animate-spin mr-2" />
+                Logging in...
+              </>
+            ) : (
+              'Log In'
+            )}
           </button>
         </form>
 
         <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
           <p>Demo credentials:</p>
-          <p>Username: admin</p>
-          <p>Password: password123</p>
+          <p>Email: admin@chandanmee.com</p>
+          <p>Password: admin123456</p>
         </div>
       </motion.div>
     </div>

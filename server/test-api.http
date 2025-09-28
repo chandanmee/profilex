@@ -1,0 +1,167 @@
+### Backend API Testing
+### Base URL: http://localhost:5000
+
+### Health Check
+GET http://localhost:5000/api/health
+
+###
+
+### Authentication - Login
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@chandanportfolio.com",
+  "password": "admin123456"
+}
+
+###
+
+### Authentication - Get Profile (requires token)
+GET http://localhost:5000/api/auth/me
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+###
+
+### Contact Form - Submit
+POST http://localhost:5000/api/contact
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "subject": "Test Contact",
+  "message": "This is a test message from the contact form."
+}
+
+###
+
+### Contact - Get All (Admin only)
+GET http://localhost:5000/api/contact
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+###
+
+### Blog - Get All Blogs
+GET http://localhost:5000/api/blog
+
+###
+
+### Blog - Get All Blogs with Pagination
+GET http://localhost:5000/api/blog?page=1&limit=5&sort=-createdAt
+
+###
+
+### Blog - Search Blogs
+GET http://localhost:5000/api/blog?search=javascript&category=technology
+
+###
+
+### Blog - Create Blog (Admin only)
+POST http://localhost:5000/api/blog
+Content-Type: application/json
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+{
+  "title": "Getting Started with Node.js",
+  "content": "Node.js is a powerful JavaScript runtime built on Chrome's V8 JavaScript engine. In this comprehensive guide, we'll explore how to get started with Node.js development...",
+  "excerpt": "Learn the basics of Node.js development in this beginner-friendly guide.",
+  "category": "technology",
+  "tags": ["nodejs", "javascript", "backend", "tutorial"],
+  "status": "published",
+  "seoTitle": "Getting Started with Node.js - Complete Guide",
+  "seoDescription": "Learn Node.js from scratch with this comprehensive guide covering installation, basics, and best practices.",
+  "seoKeywords": ["nodejs", "javascript", "backend development", "tutorial"]
+}
+
+###
+
+### Blog - Get Single Blog by ID
+GET http://localhost:5000/api/blog/BLOG_ID_HERE
+
+###
+
+### Blog - Get Single Blog by Slug
+GET http://localhost:5000/api/blog/slug/getting-started-with-nodejs
+
+###
+
+### Blog - Update Blog (Admin only)
+PUT http://localhost:5000/api/blog/BLOG_ID_HERE
+Content-Type: application/json
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+{
+  "title": "Getting Started with Node.js - Updated",
+  "content": "Updated content here...",
+  "status": "published"
+}
+
+###
+
+### Blog - Delete Blog (Admin only)
+DELETE http://localhost:5000/api/blog/BLOG_ID_HERE
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+###
+
+### Blog - Like Blog
+POST http://localhost:5000/api/blog/BLOG_ID_HERE/like
+
+###
+
+### Blog - Get Related Blogs
+GET http://localhost:5000/api/blog/BLOG_ID_HERE/related
+
+###
+
+### Users - Get All Users (Admin only)
+GET http://localhost:5000/api/auth/users
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+###
+
+### Users - Create User (Admin only)
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+{
+  "name": "Test User",
+  "email": "testuser@example.com",
+  "password": "testpassword123",
+  "role": "user",
+  "bio": "Test user for API testing"
+}
+
+###
+
+### Change Password
+PUT http://localhost:5000/api/auth/change-password
+Content-Type: application/json
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+{
+  "currentPassword": "admin123456",
+  "newPassword": "newpassword123"
+}
+
+###
+
+### Contact Statistics (Admin only)
+GET http://localhost:5000/api/contact/stats/overview
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+###
+
+### Update Contact Status (Admin only)
+PUT http://localhost:5000/api/contact/CONTACT_ID_HERE/status
+Content-Type: application/json
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+{
+  "status": "replied",
+  "notes": "Responded via email"
+}
+
+###

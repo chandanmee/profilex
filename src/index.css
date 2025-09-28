@@ -64,6 +64,26 @@
   .card {
     @apply bg-white dark:bg-dark-700 rounded-xl shadow-md overflow-hidden transition-all duration-300;
   }
+
+  /* Blog post heading spacing */
+  .prose h2 {
+    @apply mt-12 mb-6;
+  }
+
+  .prose h3 {
+    @apply mt-10 mb-5;
+  }
+
+  .prose h4 {
+    @apply mt-8 mb-4;
+  }
+
+  /* First heading after content start should have less top margin */
+  .prose > h2:first-child,
+  .prose > h3:first-child,
+  .prose > h4:first-child {
+    @apply mt-0;
+  }
 }
 
 /* Cursor */
