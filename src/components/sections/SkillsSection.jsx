@@ -4,21 +4,21 @@ import { motion } from "framer-motion";
 import skillsBg from "@assets/illustrations/dots-pattern-bg.png";
 
 // Import your own icons
-import htmlIcon from "@assets/icons/figma.png";
-import cssIcon from "@assets/icons/framer.png";
-import reactIcon from "@assets/icons/figma.png";
-import jsIcon from "@assets/icons/framer.png";
-import tailwindIcon from "@assets/icons/framer.png";
+import htmlIcon from "@assets/icons/html5.png";
+import cssIcon from "@assets/icons/css.png";
+import jsIcon from "@assets/icons/javascript.png";
+import tailwindIcon from "@assets/icons/tailwind.png";
+import reactIcon from "@assets/icons/react.png";
 import figmaIcon from "@assets/icons/figma.png";
 import uxIcon from "@assets/icons/illustrator.png";
-import gitIcon from "@assets/icons/figma.png";
-import apiIcon from "@assets/icons/figma.png";
+import gitIcon from "@assets/icons/git.png";
+import apiIcon from "@assets/icons/api.png";
 import prototypeIcon from "@assets/icons/illustrator.png";
 import accessIcon from "@assets/icons/figma.png";
-import responsiveIcon from "@assets/icons/illustrator.png";
-import illustratorIcon from "@assets/icons/figma.png";
+import responsiveIcon from "@assets/icons/responsive.png";
+import illustratorIcon from "@assets/icons/illustrator.png";
 import performanceIcon from "@assets/icons/illustrator.png";
-import seoIcon from "@assets/icons/framer.png";
+import seoIcon from "@assets/icons/seo.png";
 
 const SkillsSection = () => {
   const skills = [
@@ -27,16 +27,18 @@ const SkillsSection = () => {
     { name: "JavaScript", icon: jsIcon },
     { name: "React", icon: reactIcon },
     { name: "Tailwind CSS", icon: tailwindIcon },
-    { name: "Figma", icon: figmaIcon },
-    { name: "UI/UX Design", icon: uxIcon },
+
+    // { name: "UI/UX Design", icon: uxIcon },
     { name: "Git", icon: gitIcon },
     { name: "REST APIs", icon: apiIcon },
-    { name: "Prototyping", icon: prototypeIcon },
+    // { name: "Prototyping", icon: prototypeIcon },
     { name: "Accessibility", icon: accessIcon },
     { name: "Responsive Design", icon: responsiveIcon },
+    { name: "SEO", icon: seoIcon },
+
+    { name: "Figma", icon: figmaIcon },
     { name: "Illustrator", icon: illustratorIcon },
     // { name: "Web Performance", icon: performanceIcon },
-    { name: "SEO", icon: seoIcon },
   ];
 
   // Slide-in animation variants

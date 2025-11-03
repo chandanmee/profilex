@@ -30,6 +30,9 @@ pids
 *.seed
 *.pid.lock
 
+#docs
+server/docs/todo.md
+
 # Coverage directory used by tools like istanbul
 coverage/
 *.lcov

@@ -15,8 +15,11 @@ import {
   FiSettings
 } from 'react-icons/fi';
 import { getDashboardStats } from '../../api/blog.js';
+import AdminSidebar from '../../components/AdminSidebar';
+import AdminHeader from '../../components/AdminHeader';
 
 const AdminDashboard = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const [stats, setStats] = useState({
     totalBlogs: 0,
     publishedBlogs: 0,
@@ -132,37 +135,41 @@ const AdminDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20 pb-8 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Loading dashboard...</p>
+      <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
+        <AdminSidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+        <div className={`flex-1 transition-all duration-300 ${isCollapsed ? 'ml-20' : 'ml-80'}`}>
+          <div className="flex items-center justify-center h-full">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500 mx-auto mb-4"></div>
+              <p className="text-gray-600 dark:text-gray-400">Loading dashboard...</p>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20 pb-8">
-      <div className="container mx-auto px-6">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-6"
-        >
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
-            Admin Dashboard
-          </h1>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Welcome back! Here's what's happening with your content.
-          </p>
+    <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
+      <AdminSidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+      <div className={`flex-1 transition-all duration-300 ${isCollapsed ? 'ml-20' : 'ml-80'}`}>
+        <div className="p-8 overflow-y-auto h-full">
+          {/* Admin Header */}
+          <AdminHeader 
+            title="Dashboard Overview" 
+            subtitle="Monitor your portfolio performance and analytics" 
+          />
+
+          {/* Error Message */}
           {error && (
-            <div className="mt-2 p-2 bg-yellow-100 border border-yellow-400 text-yellow-700 rounded text-sm">
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-6 p-4 bg-yellow-100 border border-yellow-400 text-yellow-700 rounded-lg"
+            >
               {error} - Showing fallback data
-            </div>
+            </motion.div>
           )}
-        </motion.div>
 
         {/* Stats Overview */}
         <motion.div
@@ -273,6 +280,7 @@ const AdminDashboard = () => {
               ))}
             </div>
           </motion.div>
+        </div>
 
           {/* Recent Activity */}
           <motion.div

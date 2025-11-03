@@ -2,59 +2,129 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiDownload, FiAward, FiCalendar, FiUsers } from 'react-icons/fi';
-
+import chandanAbout from "@assets/illustrations/chandanmee-about.png";
+import bgPattern from "@assets/illustrations/dots-pattern-bg.png"; 
+import pmCertificate from "@assets/certificate/pm-linkedin.png"; 
+import reactCertificate from "@assets/certificate/reactjs-linkedin.png"; 
+import reactCertificate2 from "@assets/certificate/learntube_react.jpg"; 
+import googleDigitalCertificate from "@assets/certificate/googele_digital_garage.png"; 
+import accentureCertificate from "@assets/certificate/accenture_certificate.png"; 
+import accentureCertificate2 from "@assets/certificate/accenture_certificate2.png"; 
+import tcsCertificate from "@assets/certificate/tcs_certificate.png"; 
+import productUiux from "@assets/certificate/product_uiux.jpg"; 
+import outSkillAi from "@assets/certificate/outskill_ai.png"; 
+import gitCertificate from "@assets/certificate/git-inkedin.png"; 
+import be10xCertificate from "@assets/certificate/be10x.png"; 
 const About = () => {
   const certifications = [
     {
       id: 1,
-      title: 'Web Development Certification',
-      issuer: 'Udemy',
-      date: '2021',
-      image: 'https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Certification',
+      title: 'Generative AI Mastermind',
+      issuer: 'Outskill',
+      date: '2025',
+      image: outSkillAi,
     },
-    {
+      {
       id: 2,
-      title: 'React Developer Certification',
-      issuer: 'Coursera',
-      date: '2022',
-      image: 'https://via.placeholder.com/300x200/0EA5E9/FFFFFF?text=Certification',
+      title: 'Product/UX Strategy Assessment',
+      issuer: 'Leartube.ai',
+      date: '2025',
+      image: productUiux,
     },
-    {
+        {
       id: 3,
-      title: 'Digital Marketing Specialist',
+      title: 'React.js Developer Assessment',
+      issuer: 'Leartube.ai',
+      date: '2025',
+      image: reactCertificate2,
+    },
+            {
+      id: 4,
+      title: 'React.Js Essential Learning',
+      issuer: 'LinkedIn',
+      date: '2024',
+      image: reactCertificate,
+    },
+              {
+      id: 5,
+      title: 'Certified Associate in Project Management(CAPM)',
+      issuer: 'LinkedIn',
+      date: '2024',
+      image: pmCertificate,
+    },
+     {
+      id: 6,
+      title: 'Google Digital garage',
       issuer: 'Google',
-      date: '2020',
-      image: 'https://via.placeholder.com/300x200/10B981/FFFFFF?text=Certification',
+      date: '2021',
+      image: googleDigitalCertificate,
     },
     {
-      id: 4,
-      title: 'UI/UX Design Fundamentals',
-      issuer: 'Interaction Design Foundation',
+      id: 7,
+      title: 'TCS iON Career Edge - Young Professional',
+      issuer: 'TCS',
       date: '2021',
-      image: 'https://via.placeholder.com/300x200/F59E0B/FFFFFF?text=Certification',
+      image: tcsCertificate,
     },
+    {
+      id: 8,
+      title: 'Accenture Discovery Program',
+      issuer: 'Accenture',
+      date: '2021',
+      image: accentureCertificate2,
+    },
+     {
+      id: 9,
+      title: 'Developer Program',
+      issuer: 'Accenture',
+      date: '2021',
+      image: accentureCertificate ,
+    },
+       {
+      id: 10,
+      title: 'Developer Program',
+      issuer: 'Accenture',
+      date: '2021',
+      image: accentureCertificate ,
+    },
+         {
+      id: 11,
+      title: 'Git Essential Training',
+      issuer: 'LinkedIn',
+      date: '2024',
+      image: gitCertificate,
+    },
+        {
+      id: 12,
+      title: 'be10x',
+      issuer: 'be10x',
+      date: '2025',
+      image: be10xCertificate,
+    },
+
+   
   ];
 
   const experiences = [
     {
       id: 1,
-      role: 'Senior Web Developer',
-      company: 'TechSolutions Inc.',
+      role: 'Software Developer',
+      company: 'iBuild Software Solutions Pvt. Ltd.',
       period: '2022 - Present',
       description: 'Leading web development projects and mentoring junior developers. Implementing modern web technologies and best practices.',
     },
     {
       id: 2,
       role: 'Frontend Developer',
-      company: 'Digital Innovations',
-      period: '2020 - 2022',
+      company: 'Netclove Technologies',
+      period: 'Aug 2019 - Mar 2022',
       description: 'Developed responsive and interactive user interfaces using React and other modern frontend technologies.',
     },
     {
       id: 3,
-      role: 'Web Designer & Developer',
+      role: 'Internship',
       company: 'Creative Studios',
-      period: '2019 - 2020',
+      period: 'Jun 2017 - Aug 2017',
       description: 'Designed and developed websites for various clients, focusing on user experience and visual appeal.',
     },
   ];
@@ -74,8 +144,8 @@ const About = () => {
               <h1 className="text-4xl md:text-5xl font-bold text-dark-900 dark:text-white mb-6">
                 About <span className="text-primary-600 dark:text-primary-400">Me</span>
               </h1>
-              <p className="text-xl text-dark-600 dark:text-gray-300 mb-8">
-                I am a young professional with 3+ years of experience, sharing my passion, creativity, and integrity for Web Design & Development, Digital Marketing, Graphics Design, SEO, and many more!
+              <p className="text-lg text-dark-600 dark:text-gray-300 mb-8">
+                I am a young professional with 5+ years of experience, sharing my passion, creativity, and integrity for Web Design & Development, Digital Marketing, Graphics Design, SEO, and many more!
               </p>
               <div className="flex flex-wrap gap-4">
                 <a
@@ -98,8 +168,12 @@ const About = () => {
               className="md:w-1/2"
             >
               <div className="relative">
-                <div className="w-full h-80 md:h-96 bg-gradient-to-tr from-primary-600 to-primary-400 rounded-lg shadow-xl flex items-center justify-center">
-                  <div className="text-white text-6xl">👨‍💻</div>
+                <div className="w-full h-80 md:h-96 bg-gradient-to-tr from-primary-600 to-primary-400 rounded-lg shadow-xl flex items-center justify-center overflow-hidden">
+                  <img 
+                    src={chandanAbout} 
+                    alt="Chandan Mee - Frontend Developer" 
+                    className="w-full h-full object-cover object-center"
+                  />
                 </div>
               </div>
             </motion.div>
@@ -109,7 +183,7 @@ const About = () => {
 
       {/* About Details Section */}
       <section className="py-20 bg-white dark:bg-dark-800">
-        <div className="container">
+        <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -117,11 +191,12 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-dark-900 dark:text-white mb-8">
-              My Journey
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              {/* Left Side - Journey Text */}
               <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-dark-900 dark:text-white mb-8">
+                  My Journey
+                </h2>
                 <p className="text-dark-600 dark:text-gray-300 mb-6">
                   I'm a passionate web developer and digital marketing professional with a strong focus on creating efficient, user-friendly, and visually appealing web solutions. My journey in the tech world began with a curiosity about how websites work and has evolved into a career dedicated to helping businesses establish their online presence.
                 </p>
@@ -129,33 +204,35 @@ const About = () => {
                   With expertise in both frontend and backend technologies, I enjoy the process of turning ideas into functional and beautiful websites. I believe in continuous learning and staying updated with the latest trends and technologies in the industry.
                 </p>
               </div>
+              
+              {/* Right Side - Stats Grid */}
               <div className="grid grid-cols-2 gap-6">
                 <div className="card p-6 flex flex-col items-center text-center">
                   <div className="text-primary-600 dark:text-primary-400 text-3xl mb-3">
                     <FiCalendar />
                   </div>
-                  <h3 className="text-xl font-bold text-dark-900 dark:text-white mb-1">3+</h3>
+                  <h3 className="text-xl font-bold text-dark-900 dark:text-white mb-1">5+</h3>
                   <p className="text-dark-600 dark:text-gray-300">Years of Experience</p>
                 </div>
                 <div className="card p-6 flex flex-col items-center text-center">
                   <div className="text-primary-600 dark:text-primary-400 text-3xl mb-3">
                     <FiAward />
                   </div>
-                  <h3 className="text-xl font-bold text-dark-900 dark:text-white mb-1">15+</h3>
+                  <h3 className="text-xl font-bold text-dark-900 dark:text-white mb-1">20+</h3>
                   <p className="text-dark-600 dark:text-gray-300">Projects Completed</p>
                 </div>
                 <div className="card p-6 flex flex-col items-center text-center">
                   <div className="text-primary-600 dark:text-primary-400 text-3xl mb-3">
                     <FiUsers />
                   </div>
-                  <h3 className="text-xl font-bold text-dark-900 dark:text-white mb-1">10+</h3>
+                  <h3 className="text-xl font-bold text-dark-900 dark:text-white mb-1">50+</h3>
                   <p className="text-dark-600 dark:text-gray-300">Happy Clients</p>
                 </div>
                 <div className="card p-6 flex flex-col items-center text-center">
                   <div className="text-primary-600 dark:text-primary-400 text-3xl mb-3">
                     <FiAward />
                   </div>
-                  <h3 className="text-xl font-bold text-dark-900 dark:text-white mb-1">5+</h3>
+                  <h3 className="text-xl font-bold text-dark-900 dark:text-white mb-1">10+</h3>
                   <p className="text-dark-600 dark:text-gray-300">Certifications</p>
                 </div>
               </div>

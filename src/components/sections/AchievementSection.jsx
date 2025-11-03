@@ -1,45 +1,63 @@
 import { motion } from "framer-motion";
 // Assets
 import bgPattern from "@assets/illustrations/dots-pattern-bg.png"; 
-import reactCertificate from "@assets/gallery/tcs_certificate.png"; 
-import awsCertificate from "@assets/gallery/tcs_certificate.png"; 
-import accentureCertificate from "@assets/gallery/tcs_certificate.png"; 
-import tcsCertificate from "@assets/gallery/tcs_certificate.png"; 
-import jsFreeCodeCertificate from "@assets/gallery/tcs_certificate.png"; 
-import responsiveFreeCodeCertificate from "@assets/gallery/tcs_certificate.png"; 
-import googleDigitalCertificate from "@assets/gallery/tcs_certificate.png"; 
+import pmCertificate from "@assets/certificate/pm-linkedin.png"; 
+import reactCertificate from "@assets/certificate/reactjs-linkedin.png"; 
+import reactCertificate2 from "@assets/certificate/learntube_react.jpg"; 
+import googleDigitalCertificate from "@assets/certificate/googele_digital_garage.png"; 
+import accentureCertificate from "@assets/certificate/accenture_certificate.png"; 
+import accentureCertificate2 from "@assets/certificate/accenture_certificate2.png"; 
+import tcsCertificate from "@assets/certificate/tcs_certificate.png"; 
+import productUiux from "@assets/certificate/product_uiux.jpg"; 
+import outSkillAi from "@assets/certificate/outskill_ai.png"; 
 
 // Sample Achievements
 const achievements = [
   {
-    image: reactCertificate,
-    title: "React Developer Certification",
-    brand: "Meta",
-  },
-  {
-    image: reactCertificate,
-    title: "Cloud Practitioner",
-    brand: "AWS",
-  },
-  {
-    image: reactCertificate,
-    title: "UI/UX Design Mastery",
-    brand: "Coursera",
+    image: outSkillAi,
+    title: "Generative AI Mastermind",
+    brand: "Outskill",
   },
     {
+    image:  productUiux,
+    title: "Product/UX Strategy Assessment",
+    brand: "Leartube.ai",
+  },
+     {
+    image:  reactCertificate2,
+    title: "React.js Developer Assessment",
+    brand: "Leartube.ai",
+  },
+     {
     image: reactCertificate,
-    title: "React Developer Certification",
-    brand: "Meta",
+    title: "React.Js Essential Learning",
+    brand: "LinkedIn",
   },
   {
-    image: reactCertificate,
-    title: "Cloud Practitioner",
-    brand: "AWS",
+    image: pmCertificate,
+    title: "Certified Associate in Project Management(CAPM)",
+    brand: "LinkedIn",
+  },
+  
+  {
+    image: googleDigitalCertificate,
+    title: "Google Digital garage",
+    brand: "Google",
+  },
+    {
+    image: tcsCertificate,
+    title: "TCS iON Career Edge - Young Professional",
+    brand: "TCS",
   },
   {
-    image: reactCertificate,
-    title: "UI/UX Design Mastery",
-    brand: "Coursera",
+    image: accentureCertificate,
+    title: "Accenture DIscovery Program",
+    brand: "Accenture",
+  },
+  {
+    image: accentureCertificate2,
+    title: "Developer Program",
+    brand: "Accenture",
   },
 ];
 
