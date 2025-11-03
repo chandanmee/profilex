@@ -3,73 +3,90 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FiExternalLink, FiGithub } from "react-icons/fi";
 // Assets
-import netcloveProj from '@assets/gallery/netclove_proj.png';
-import jrdigitalProj from '@assets/gallery/jrdigital_proj.png';
-import mbtechlifeProj from '@assets/gallery/mbtechlife_proj.png';
-import riayanahomesProj from '@assets/gallery/riayanahomes_proj.png';
-import edumossProj from '@assets/gallery/edumoss_proj.png';
+
+import fusiondeskProj from '@assets/gallery/fusiondesk_proj.png';
+import convergeuiProj from '@assets/gallery/convergeui_proj.png'
+import ibuildsuite_proj from '@assets/gallery/ibuildsuite_proj.png'
+import cyberitesProj from '@assets/gallery/cyberites_proj.png'
+import TeamifyProj from '@assets/gallery/teamify_proj.png'
+import FocusMateProj from '@assets/gallery/focusmate_proj.png'
+
 const ProjectsShowcase = () => {
   const projects = [
-    {
+
+        {
       id: 1,
-      title: "Cyberites",
+      title: "Fusiondesk- Integrated Service Management (ISM)",
       description:
-        "A comprehensive resource management platform for teams to organize and share digital assets.",
-      image: netcloveProj,
-      tags: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+        "An all-in-one customer support and help desk solution for businesses.",
+      image: fusiondeskProj,
+      tags: ['HTML', 'CSS', 'JS','Jquery','React','Tailwind CSS'],
       liveLink: "#",
       githubLink: "#",
     },
-    {
+       {
       id: 2,
-      title: "ElevateX",
+      title: "ConvergeUI – Design System",
       description:
-        "A modern learning management system with interactive courses and progress tracking.",
-      image: jrdigitalProj,
-      tags: ["React", "Firebase", "Tailwind CSS", "Redux"],
+        "An all-in-one customer support and help desk solution for businesses.",
+      image: convergeuiProj,
+      tags: ['HTML', 'CSS', 'JS','Jquery','React','Tailwind CSS'],
       liveLink: "#",
       githubLink: "#",
     },
     {
       id: 3,
-      title: "FusionDesk",
+      title: "iBuildSuite – Intranet Solutions",
       description:
-        "An all-in-one customer support and help desk solution for businesses.",
-      image: mbtechlifeProj,
-      tags: ["React", "Express", "PostgreSQL", "Socket.io"],
+        "A comprehensive resource management platform for teams to organize and share digital assets.",
+      image: ibuildsuite_proj,
+      tags: ['HTML', 'CSS', 'JS','Jquery','React', 'Socket.io', 'Tailwind CSS'],
       liveLink: "#",
       githubLink: "#",
     },
     {
       id: 4,
-      title: "PulseMetrics",
-      description:
-        "Real-time analytics dashboard for monitoring business performance metrics.",
-      image: riayanahomesProj,
-      tags: ["React", "D3.js", "Node.js", "MongoDB"],
-      liveLink: "#",
-      githubLink: "#",
-    },
-        {
-      id: 5,
-      title: "ElevateX",
+      title: "Cyberites – Cybersecurity Services",
       description:
         "A modern learning management system with interactive courses and progress tracking.",
-      image: jrdigitalProj,
-      tags: ["React", "Firebase", "Tailwind CSS", "Redux"],
+      image: cyberitesProj,
+      tags: ['HTML', 'CSS', 'JS','Jquery','React','Tailwind CSS'],
       liveLink: "#",
       githubLink: "#",
     },
+
     {
-      id: 6,
-      title: "FusionDesk",
+      id: 5,
+      title: "Teamify -HRESS (Self Service Portal)",
       description:
-        "An all-in-one customer support and help desk solution for businesses.",
-      image: mbtechlifeProj,
-      tags: ["React", "Express", "PostgreSQL", "Socket.io"],
+        "Real-time analytics dashboard for monitoring business performance metrics.",
+      image: TeamifyProj,
+      tags: ['HTML', 'CSS', 'JS','Jquery','React','Tailwind CSS'],
       liveLink: "#",
       githubLink: "#",
     },
+
+       {
+      id: 6,
+      title: "FocusMate – AI-Powered Productivity Application",
+      description:
+        "A smart productivity app built around the Pomodoro technique, designed to help users stay focused and manage tasks efficiently",
+      image: FocusMateProj,
+      tags: ['HTML', 'CSS', 'JS','Jquery','React','Tailwind CSS', 'AI'],
+      liveLink: "#",
+      githubLink: "#",
+    },
+    //     {
+    //   id: 7,
+    //   title: "iBuildGRC – Governance, Risk & Complianc",
+    //   description:
+    //     "A modern learning management system with interactive courses and progress tracking.",
+    //   image: jrdigitalProj,
+    //   tags: ["React", "Firebase", "Tailwind CSS", "Redux"],
+    //   liveLink: "#",
+    //   githubLink: "#",
+    // },
+ 
   ];
 
   return (

@@ -111,7 +111,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="border-t border-gray-200 dark:border-dark-700 mt-8 pt-8 text-center text-dark-600 dark:text-gray-300">
-          <p>&copy; {currentYear} Chandan Mee. All rights reserved.</p>
+          <p>&copy; {currentYear} Chandanmee. All rights reserved.</p>
         </div>
       </div>
     </footer>

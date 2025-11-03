@@ -22,6 +22,7 @@ const Contact = () => {
       [name]: value,
     }));
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,8 +71,8 @@ const Contact = () => {
     {
       icon: <FiPhone />,
       title: 'Phone',
-      content: '+1 (123) 456-7890',
-      link: 'tel:+11234567890',
+      content: '+91 9438 143118',
+      link: 'tel:+919438143118',
     },
     {
       icon: <FiMapPin />,
