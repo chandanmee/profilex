@@ -1,45 +1,26 @@
 import { motion } from "framer-motion";
-import {
-  FaGraduationCap,
-  FaHospital,
-  FaHotel,
-  FaShoppingCart,
-  FaPlane,
-  FaCalendarAlt,
-  FaSeedling,
-  FaCouch,
-  FaFilm,
-  FaBuilding,
-  FaPencilRuler,
-  FaCar,
-  FaUser,
-  FaBriefcase,
-  FaCamera,
-  FaMobileAlt,
-  FaIndustry,
-} from "react-icons/fa";
 
 // ReactBits background
 // import LightRays from "../reactbits/LightRays/LightRays";
 import DarkVeil from "../reactbits/DarkVeil/DarkVeil";
 
 const industries = [
-  { name: "Education", icon: <FaGraduationCap /> },
-  { name: "Healthcare", icon: <FaHospital /> },
-  { name: "Hospitality", icon: <FaHotel /> },
-  { name: "Super Market", icon: <FaShoppingCart /> },
-  { name: "Tour & Travels", icon: <FaPlane /> },
-  { name: "Event Organizer", icon: <FaCalendarAlt /> },
-  { name: "Agriculture", icon: <FaSeedling /> },
-  { name: "Electronics & Furniture", icon: <FaCouch /> },
-  { name: "Entertainment", icon: <FaFilm /> },
-  { name: "Real Estate", icon: <FaBuilding /> },
-  { name: "Interior Designer", icon: <FaPencilRuler /> },
-  { name: "Automobiles", icon: <FaCar /> },
-  { name: "Personal Portfolio", icon: <FaUser /> },
-  { name: "Consultancy", icon: <FaBriefcase /> },
-  { name: "Studio", icon: <FaCamera /> },
-  { name: "On-Demand", icon: <FaMobileAlt /> },
+  { name: "Education", icon: "🎓" },
+  { name: "Healthcare", icon: "🏥" },
+  { name: "Hospitality", icon: "🏨" },
+  { name: "Super Market", icon: "🛒" },
+  { name: "Tour & Travels", icon: "✈️" },
+  { name: "Event Organizer", icon: "📅" },
+  { name: "Agriculture", icon: "🌱" },
+  { name: "Electronics & Furniture", icon: "🛋️" },
+  { name: "Entertainment", icon: "🎬" },
+  { name: "Real Estate", icon: "🏢" },
+  { name: "Interior Designer", icon: "📐" },
+  { name: "Automobiles", icon: "🚗" },
+  { name: "Personal Portfolio", icon: "👤" },
+  { name: "Consultancy", icon: "💼" },
+  { name: "Studio", icon: "📷" },
+  { name: "On-Demand", icon: "📱" },
 ];
 
 const firstRow = industries.slice(0, Math.ceil(industries.length / 2));
@@ -49,12 +30,12 @@ const IndustrySection = () => {
   return (
     <section className="py-20 relative overflow-hidden bg-gray-50 dark:bg-transparent">
       {/* Light Rays Background - only show in dark mode */}
-      <div className="absolute inset-0 z-0 dark:block hidden">
+      <div className="absolute inset-0 z-0 dark:block hidden effect-layer">
         <DarkVeil />
       </div>
 
       {/* Light mode background */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-primary-50/50 via-gray-50 to-primary-100/30 dark:hidden"></div>
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-primary-50/50 via-gray-50 to-primary-100/30 dark:hidden effect-layer"></div>
 
       {/* Content */}
       <div className="container relative z-10">
@@ -68,7 +49,7 @@ const IndustrySection = () => {
         >
           <div className="flex justify-center mb-4">
             <div className="p-4 bg-primary-100 dark:bg-primary-900 rounded-full text-primary-600 dark:text-primary-400">
-              <FaIndustry size={32} />
+              <span className="text-3xl" aria-hidden>🏭</span>
             </div>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-dark-900 dark:text-white">

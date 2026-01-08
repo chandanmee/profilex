@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaBullseye, FaLightbulb } from "react-icons/fa";
+import { BullseyeIcon, LightbulbIcon } from "../InlineIcons";
 
 const MissionVision = () => {
   return (
@@ -40,7 +40,7 @@ const MissionVision = () => {
           >
             <div className="flex items-center mb-6">
               <div className="p-4 bg-primary-100 dark:bg-cyan-600/20 rounded-full">
-                <FaBullseye className="text-primary-600 dark:text-cyan-400 text-3xl" />
+              <BullseyeIcon className="w-8 h-8 text-primary-600 dark:text-cyan-400" />
               </div>
               <h3 className="ml-4 text-2xl font-bold text-dark-900 dark:text-white">My Mission</h3>
             </div>
@@ -60,7 +60,7 @@ const MissionVision = () => {
           >
             <div className="flex items-center mb-6">
               <div className="p-4 bg-primary-100 dark:bg-indigo-600/20 rounded-full">
-                <FaLightbulb className="text-primary-600 dark:text-indigo-400 text-3xl" />
+              <LightbulbIcon className="w-8 h-8 text-primary-600 dark:text-indigo-400" />
               </div>
               <h3 className="ml-4 text-2xl font-bold text-dark-900 dark:text-white">My Vision</h3>
             </div>

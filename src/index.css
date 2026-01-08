@@ -84,6 +84,14 @@
   .prose > h4:first-child {
     @apply mt-0;
   }
+
+  /* Isolate heavy background effect layers to reduce reflow cost */
+  .effect-layer {
+    content-visibility: auto;
+    contain: layout paint style;
+    will-change: transform;
+    pointer-events: none;
+  }
 }
 
 /* Cursor */

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FaHandshake } from "react-icons/fa";
+import { HandshakeIcon } from "../InlineIcons";
 import LightRays from "../reactbits/LightRays/LightRays";
 
 
@@ -36,8 +36,8 @@ const ClientsSection = () => {
   return (
     <section className="py-20 relative overflow-hidden">
       {/* Hyperspeed Background (fills entire section) */}
-      <div className="absolute inset-0 z-0">
-           <LightRays />
+      <div className="absolute inset-0 z-0 effect-layer">
+           <LightRays followMouse={false} />
       </div>
 
       {/* Content Layer */}
@@ -52,7 +52,7 @@ const ClientsSection = () => {
         >
           <div className="flex justify-center mb-4">
             <div className="p-4 bg-primary-100 dark:bg-primary-900 rounded-full text-primary-600 dark:text-primary-400">
-              <FaHandshake size={32} />
+              <HandshakeIcon className="w-8 h-8" />
             </div>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-dark-900 dark:text-white">
