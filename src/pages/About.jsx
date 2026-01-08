@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiDownload, FiAward, FiCalendar, FiUsers } from 'react-icons/fi';
-import chandanAbout from "@assets/illustrations/chandanmee-about.png";
+import chandanAbout from "@assets/illustrations/chandanmee-about.webp";
 import bgPattern from "@assets/illustrations/dots-pattern-bg.png"; 
 import pmCertificate from "@assets/certificate/pm-linkedin.png"; 
 import reactCertificate from "@assets/certificate/reactjs-linkedin.png"; 
@@ -15,6 +15,8 @@ import productUiux from "@assets/certificate/product_uiux.jpg";
 import outSkillAi from "@assets/certificate/outskill_ai.png"; 
 import gitCertificate from "@assets/certificate/git-inkedin.png"; 
 import be10xCertificate from "@assets/certificate/be10x.png"; 
+import resumePdf from "@assets/docs/Chandan Kumar Pradhan - Front-End Developer.pdf";
+
 const About = () => {
   const certifications = [
     {
@@ -112,20 +114,47 @@ const About = () => {
       company: 'iBuild Software Solutions Pvt. Ltd.',
       period: '2022 - Present',
       description: 'Leading web development projects and mentoring junior developers. Implementing modern web technologies and best practices.',
+      highlights: [
+        'Led frontend architecture for enterprise-scale platforms including Integrated Service Management (ISM), DMS, HRM, and collaboration systems..',
+        'Designed and implemented scalable architectures using feature-based modularization.',
+        'Designed and developed scalable front-end architectures for multiple enterprise-grade web applications, with a strong focus on user experience and functionality. ',
+        'Mentored junior developers and conducted code reviews, enforcing best practices and clean code principles',
+        'Conducted in-depth research and analysis across CMS, GRC, KMS, and DMS platforms, as well as G2, Gartner, and Capterra, delivering insights to optimize business processes and support informed decision-making.',
+        'Contributed to the creation of a centralized design system, improving design-to-development alignment and speeding up UI delivery.',
+        'Led other creative initiatives including UI, mock-ups, brand guidelines, and branding assets, ensuring consistent and engaging visual identities'
+      ]
     },
     {
       id: 2,
       role: 'Frontend Developer',
       company: 'Netclove Technologies',
       period: 'Aug 2019 - Mar 2022',
-      description: 'Developed responsive and interactive user interfaces using React and other modern frontend technologies.',
+      description: 'Led end-to-end client-facing React projects, gathering business requirements and translating them into clear technical specifications.',
+      highlights: [
+        'Acted as a bridge between clients, designers, and development teams, ensuring alignment on scope, timelines, and deliverables.',
+        'Collaborated with UX/UI designers to implement pixel-perfect designs.',,
+        'Designed and developed scalable, high-performance React applications using modern practices (Hooks, Context API, reusable components)',
+        'Integrated RESTful APIs and handled complex state management.',
+        'Maintained project documentation, technical decisions, and development guidelines.',
+        'Created and implemented Wireframes, mockups, and high-fidelity prototypes for web applications, ensuring seamless UI/UX functionality and Cross-browser compatibility.',
+        'Delivered visually consistent and user-friendly web interfaces for client-facing applications.',
+        'Worked closely with designers and backend developers to ensure seamless integration.',
+        'Delivered projects on time while maintaining high code quality and client satisfaction.'
+      ]
     },
     {
       id: 3,
       role: 'Internship',
-      company: 'Creative Studios',
+      company: 'Anthem Global Technology Services Pvt. Ltd· ',
       period: 'Jun 2017 - Aug 2017',
       description: 'Designed and developed websites for various clients, focusing on user experience and visual appeal.',
+      highlights: [
+        'Assisted in the design and development of client websites.',,
+        'Assisted on real-world Government and public-sector projects, gaining exposure to enterprise-scale systems and structured development environments.',
+        'Participated in client meetings and requirement gathering.',
+        'Gained hands-on experience with HTML, CSS, JavaScript, jQuery, and Bootstrap, debugging, and UI enhancements.',
+        'Ensured cross-browser compatibility and mobile responsiveness.'
+      ]
     },
   ];
 
@@ -145,12 +174,16 @@ const About = () => {
                 About <span className="text-primary-600 dark:text-primary-400">Me</span>
               </h1>
               <p className="text-lg text-dark-600 dark:text-gray-300 mb-8">
-                I am a young professional with 5+ years of experience, sharing my passion, creativity, and integrity for Web Design & Development, Digital Marketing, Graphics Design, SEO, and many more!
+                You can call me a designer, developer, or advisor. I am in this era from 5+ years and Industry experience of 3.5+ Years. I have a serious passion for developing sites for small businesses, startups, and organizations. I enjoy VS Code with a cup of coffee. I am always excited to give the best visual experience and interactive version that speak to my client's brand, vision, and message.
+              </p>
+
+                 <p className="text-lg text-dark-600 dark:text-gray-300 mb-8">
+              I have always been someone that defines both the creative and logical side of myself. Enjoy the feelings of joy for fixing the bug, solving problems, mapping complex problems, exploring new applications and ideas, and making things most simple.
               </p>
               <div className="flex flex-wrap gap-4">
                 <a
-                  href="/resume.pdf"
-                  download
+                  href={resumePdf}
+                  download="Chandan_Kumar_Pradhan_Resume.pdf"
                   className="btn btn-primary"
                 >
                   Download CV <FiDownload className="inline ml-2" />
@@ -278,7 +311,14 @@ const About = () => {
                     {exp.period}
                   </div>
                 </div>
-                <p className="text-dark-600 dark:text-gray-300">{exp.description}</p>
+                <p className="text-dark-600 dark:text-gray-300 mb-4">{exp.description}</p>
+                {exp.highlights && (
+                  <ul className="list-disc list-outside ml-5 space-y-1 text-dark-600 dark:text-gray-300">
+                    {exp.highlights.map((point, i) => (
+                      <li key={i}>{point}</li>
+                    ))}
+                  </ul>
+                )}
               </motion.div>
             ))}
           </div>
@@ -310,11 +350,11 @@ const About = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="card overflow-hidden group"
               >
-                <div className="relative overflow-hidden">
+                <div className="relative overflow-hidden bg-gray-50 dark:bg-gray-700">
                   <img
                     src={cert.image}
                     alt={cert.title}
-                    className="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-48 object-contain p-2 transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <div className="p-6">

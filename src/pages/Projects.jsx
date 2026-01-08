@@ -1,144 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiExternalLink, FiGithub, FiFilter } from 'react-icons/fi';
-import fusiondeskProj from '@assets/gallery/fusiondesk_proj.png';
-import convergeuiProj from '@assets/gallery/convergeui_proj.png'
-import ibuildsuite_proj from '@assets/gallery/ibuildsuite_proj.png'
-import cyberitesProj from '@assets/gallery/cyberites_proj.png'
-import TeamifyProj from '@assets/gallery/teamify_proj.png'
-import FocusMateProj from '@assets/gallery/focusmate_proj.png'
-import EdumossProj from '@assets/gallery/edumoss_proj.png';
-import netcloveProj from '@assets/gallery/netclove_proj.png';
-import ITSProj from '@assets/gallery/its_m.png';
-
-import jrdigitalProj from '@assets/gallery/jrdigital_proj.png';
-import mbtechlifeProj from '@assets/gallery/mbtechlife_proj.png';
-import riayanahomesProj from '@assets/gallery/riayanahomes_proj.png';
-
+import { Link } from 'react-router-dom';
+import { projects } from '../data/projects';
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
-
-  const projects = [
-    {
-      id: 1,
-      title: 'Fusiondesk- Integrated Service Management (ISM)',
-      description: 'A unified platform designed to streamline IT and business service operations. Fusiondesk integrates ticketing, asset management, and workflow automation, improving efficiency, collaboration, and service delivery across departments.',
-      image: fusiondeskProj,
-      tags: ['HTML', 'CSS', 'JS','Jquery','React','Tailwind CSS'],
-      category: 'web-app',
-      liveLink: 'https://fusiondesk.in/',
-      githubLink: '#',
-    },
-
-    {
-      id: 2,
-      title: 'ConvergeUI – Design System',
-      description: 'A scalable and reusable design system built to ensure consistency across digital products. ConvergeUI includes a comprehensive component library, color palettes, typography, and interaction patterns that align brand identity with UI best practices.',
-      image: convergeuiProj,
-     tags: ['HTML', 'CSS', 'JS','Jquery','React','Tailwind CSS'],
-      category: 'web-app',
-      liveLink: '#',
-      githubLink: '#',
-    },
-    {
-      id: 3,
-      title: 'iBuildSuite – Intranet Solutions',
-      description: 'An enterprise intranet suite providing centralized communication, document management, and collaboration tools. iBuildSuite enhances internal engagement, improves accessibility, and simplifies knowledge sharing within organizations.',
-      image: ibuildsuite_proj,
-      tags: ['HTML', 'CSS', 'JS','Jquery','React', 'Socket.io', 'Tailwind CSS'],
-      category: 'web-app',
-      liveLink: '#',
-      githubLink: '#',
-    },
-
-       {
-      id: 4,
-      title: 'Cyberites – Cybersecurity Services',
-      description: 'A human resource self-service platform that empowers employees to manage personal data, leave requests, and payroll information independently. HRESS reduces HR workload while improving transparency and employee experience.',
-      image: cyberitesProj,
-  tags: ['HTML', 'CSS', 'JS','Jquery','React','Tailwind CSS'],
-      category: 'website',
-      liveLink: 'https://cyberites.in/',
-      githubLink: '#',
-    },
-
-       {
-      id: 5,
-      title: 'Teamify -HRESS (Self Service Portal)',
-      description: 'Teamify is a modern, comprehensive Human Resources Management System built with React and designed to streamline HR operations for companies. It provides a centralized platform for managing employees, leave requests, approvals, and organizational insights.',
-      image: TeamifyProj,
-      tags:  ['HTML', 'CSS', 'JS','Jquery','React','Tailwind CSS'],
-      category: 'web-app',
-      liveLink: '#',
-      githubLink: '#',
-    },
-    // {
-    //   id: 6,
-    //   title: 'iBuildGRC – Governance, Risk & Compliance',
-    //   description: 'An enterprise-grade GRC platform that centralizes risk assessment, policy management, and compliance reporting. iBuildGRC enables organizations to maintain regulatory compliance and strengthen governance processes',
-    //   image: netcloveProj,
-    //   tags:  ['HTML', 'CSS', 'JS','Jquery','React','Tailwind CSS'],
-    //   category: 'web-app',
-    //   liveLink: '#',
-    //   githubLink: '#',
-    // },
-    //    {
-    //   id: 6,
-    //   title: 'DocSync – Collaborative Document Editor',
-    //   description: 'A real-time collaborative document editing tool that allows multiple users to edit, comment, and share documents simultaneously. DocSync enhances team productivity and version control with live synchronization and secure cloud storage.',
-    //   image: netcloveProj,
-    //    tags: ['HTML', 'CSS', 'JS','Jquery','React','Tailwind CSS'],
-    //   category:'web-app',
-    //   liveLink: '#',
-    //   githubLink: '#',
-    // },
-
-           {
-      id: 6,
-      title: 'FocusMate – AI-Powered Productivity Application',
-      description: 'A smart productivity app built around the Pomodoro technique, designed to help users stay focused and manage tasks efficiently. FocusMate features customizable timers, AI-generated daily summaries and focus insights, toast and sound notifications, activity tracking, and seamless dark/light theme switching for an optimized work experience',
-      image: FocusMateProj,
-       tags: ['HTML', 'CSS', 'JS','Jquery','React','Tailwind CSS', 'AI'],
-      category:'web-app',
-      liveLink: 'https://focus-mate-teal.vercel.app/',
-      githubLink: '#',
-    },
-    {
-      id: 7,
-      title: 'Edumoss - E-learning Platform',
-      description: 'A modern learning management system (LMS) providing interactive courses, assessments, and progress tracking. Edumoss supports both educators and learners with intuitive dashboards, personalized learning paths, and gamified experiences.',
-      image: EdumossProj,
-      tags:['WordPress', 'PHP', 'MySQL', 'Custom Theme'],
-      category: 'website',
-      liveLink: 'http://edumoss.com/',
-      githubLink: '#',
-    },
-
-     {
-      id: 8,
-      title: 'Netclove – Web & Digital Solutions Agency',
-      description: 'A modern, responsive website built to showcase Netclove’s expertise in web and mobile development, digital marketing, ERP/CRM systems, and UI/UX design. The platform emphasizes clean visuals, smooth navigation, and a professional brand presence to engage clients effectively.',
-      image: netcloveProj,
-      tags:['HTML', 'CSS', 'JS','Jquery','Bootstrap','PHP','MySQL'],
-      category: 'website',
-      liveLink: 'https://netclove.com/',
-      githubLink: '#',
-    },
-
-
-
-        {
-      id: 9,
-      title: 'ITS - ServiceX',
-      description: 'A comprehensive resource management platform for teams to organize and share digital assets. Features include file organization, tagging, search, and access control.',
-      image: ITSProj,
-      tags:['HTML', 'CSS', 'JS','Jquery','Bootstrap','PHP','MySQL'],
-      category: 'web-app',
-      liveLink: '#',
-      githubLink: '#',
-    },
-  ];
 
   const filteredProjects = filter === 'all' 
     ? projects 
@@ -204,7 +71,10 @@ const Projects = () => {
 
           {/* Projects Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
+            {filteredProjects.map((project, index) => {
+              const hasLiveLink = project.liveLink && project.liveLink !== '#';
+              
+              return (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -213,25 +83,44 @@ const Projects = () => {
                 className="card overflow-hidden group h-full flex flex-col"
               >
                 <div className="relative overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-50 object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
+                  {hasLiveLink ? (
+                    <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-50 object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    </a>
+                  ) : (
+                    <Link to={`/projects/${project.id}`}>
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-50 object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    </Link>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-start p-6">
                     <div className="flex space-x-4">
-                      {project.liveLink && (
-                        <a
+                      {hasLiveLink ? (
+                        <a 
                           href={project.liveLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-white bg-primary-600 hover:bg-primary-700 p-2 rounded-full transition-colors"
-                          aria-label={`View ${project.title} live`}
+                          className="text-white bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded-full transition-colors text-sm font-medium flex items-center"
                         >
-                          <FiExternalLink />
+                          Live Preview <FiExternalLink className="ml-2" />
                         </a>
+                      ) : (
+                        <Link 
+                          to={`/projects/${project.id}`}
+                          className="text-white bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded-full transition-colors text-sm font-medium"
+                        >
+                          View Details
+                        </Link>
                       )}
-                      {project.githubLink && (
+                      
+                      {project.githubLink && project.githubLink !== '#' && (
                         <a
                           href={project.githubLink}
                           target="_blank"
@@ -264,7 +153,7 @@ const Projects = () => {
                   </div>
                 </div>
               </motion.div>
-            ))}
+            )})}
           </div>
 
           {/* Empty State */}

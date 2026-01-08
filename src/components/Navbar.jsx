@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FiSun, FiMoon, FiMenu, FiX, FiSettings, FiLogOut } from 'react-icons/fi';
+import { SunIcon, MoonIcon, MenuIcon, XIcon, SettingsIcon, LogOutIcon, LoginIcon } from './InlineIcons';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
@@ -65,6 +65,7 @@ const Navbar = () => {
               // Change the logo only if scrolled AND NOT in dark mode
               src={scrolled && !isDarkMode ? chandanLogoDk : chandanLogoLt}
               alt="Logo Chandan Mee"
+              height={60}
               className="w-48 md:w-60 max-w-full"
             />
           </motion.div>
@@ -108,7 +109,7 @@ const Navbar = () => {
                         : navItemColor
                     }`}
                   >
-                    <FiSettings className="mr-1" /> Admin
+                    <SettingsIcon className="mr-1" /> Admin
                   </Link>
                 </motion.li>
                 <motion.li
@@ -120,7 +121,7 @@ const Navbar = () => {
                     onClick={logout}
                     className={`font-medium ${navItemHoverColor} transition-colors flex items-center ${navItemColor}`}
                   >
-                    <FiLogOut className="mr-1" /> Logout
+                    <LogOutIcon className="mr-1" /> Logout
                   </button>
                 </motion.li>
               </>
@@ -131,7 +132,7 @@ const Navbar = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
-                <Link
+                {/* <Link
                   to="/login"
                   className={`font-medium ${navItemHoverColor} transition-colors flex items-center ${
                     location.pathname === '/login'
@@ -139,8 +140,8 @@ const Navbar = () => {
                       : navItemColor
                   }`}
                 >
-                  <FiLogOut className="mr-1" /> Login
-                </Link>
+                  <LoginIcon className="w-5 h-5 mr-1" /> Login
+                </Link> */}
               </motion.li>
             )}
           </ul>
@@ -154,9 +155,9 @@ const Navbar = () => {
             aria-label="Toggle theme"
           >
             {isDarkMode ? (
-              <FiSun className="text-yellow-500" />
+              <SunIcon className="w-5 h-5 text-yellow-500" />
             ) : (
-              <FiMoon className="text-primary-600" />
+              <MoonIcon className="w-5 h-5 text-primary-600" />
             )}
           </motion.button>
         </nav>
@@ -169,10 +170,10 @@ const Navbar = () => {
             aria-label="Toggle theme"
           >
             {isDarkMode ? (
-              <FiSun className="text-yellow-500" />
-            ) : (
-              <FiMoon className="text-primary-600" />
-            )}
+                <SunIcon className="text-yellow-500" />
+              ) : (
+                <MoonIcon className="text-primary-600" />
+              )}
           </button>
 
           <button
@@ -180,7 +181,7 @@ const Navbar = () => {
             className={`p-2 rounded-md hover:bg-gray-100 dark:hover:bg-dark-700 transition-colors ${navItemColor}`}
             aria-label="Toggle menu"
           >
-            {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+            {isOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
           </button>
         </div>
 
@@ -219,7 +220,7 @@ const Navbar = () => {
                           : 'text-dark-700 dark:text-gray-200'
                       }`}
                     >
-                      <FiSettings className="mr-1" /> Admin
+                      <SettingsIcon className="mr-1" /> Admin
                     </Link>
                   </li>
                   <li>
@@ -227,7 +228,7 @@ const Navbar = () => {
                       onClick={logout}
                       className="block font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center text-dark-700 dark:text-gray-200 w-full text-left"
                     >
-                      <FiLogOut className="mr-1" /> Logout
+                      <LogOutIcon className="mr-1" /> Logout
                     </button>
                   </li>
                 </>
@@ -242,7 +243,7 @@ const Navbar = () => {
                         : 'text-dark-700 dark:text-gray-200'
                     }`}
                   >
-                    <FiLogOut className="mr-1" /> Login
+                    <LoginIcon className="w-5 h-5 mr-1" /> Login
                   </Link>
                 </li>
               )}

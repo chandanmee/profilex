@@ -4,21 +4,9 @@ import { motion } from "framer-motion";
 import skillsBg from "@assets/illustrations/dots-pattern-bg.png";
 
 // Import your own icons
-import htmlIcon from "@assets/icons/html5.png";
-import cssIcon from "@assets/icons/css.png";
-import jsIcon from "@assets/icons/javascript.png";
-import tailwindIcon from "@assets/icons/tailwind.png";
-import reactIcon from "@assets/icons/react.png";
-import figmaIcon from "@assets/icons/figma.png";
-import uxIcon from "@assets/icons/illustrator.png";
-import gitIcon from "@assets/icons/git.png";
-import apiIcon from "@assets/icons/api.png";
-import prototypeIcon from "@assets/icons/illustrator.png";
-import accessIcon from "@assets/icons/figma.png";
-import responsiveIcon from "@assets/icons/responsive.png";
-import illustratorIcon from "@assets/icons/illustrator.png";
-import performanceIcon from "@assets/icons/illustrator.png";
-import seoIcon from "@assets/icons/seo.png";
+import { icons } from "@/assets/icons/index.js";
+
+const { htmlIcon, cssIcon, jsIcon, reactIcon, figmaIcon,tailwindIcon,uxIcon,gitIcon,apiIcon,prototypeIcon,accessIcon,responsiveIcon,illustratorIcon,performanceIcon,seoIcon } = icons;
 
 const SkillsSection = () => {
   const skills = [

@@ -1,15 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FiArrowRight, FiCode, FiGithub } from "react-icons/fi";
-import { FaReact, FaNodeJs } from "react-icons/fa";
-import chandanHero from "@assets/illustrations/chandanmee-hero.png";
+import { ArrowRightIcon, CodeIcon, GithubIcon } from "../InlineIcons";
+// import { FaReact, FaNodeJs } from "react-icons/fa";
+import { icons } from "@/assets/icons/index.js";
+import chandanHero from "@assets/illustrations/chandanmee-hero.webp";
+const { reactIcon, nodejsIcon } = icons;
 
 const HeroSection = () => {
   return (
     <section className="pt-28 pb-20 md:pt-32 md:pb-28 bg-[#151515] dark:bg-[#040404] overflow-hidden relative">
       {/* Background grid pattern - chandanmee inspired */}
-    
+
       <div className="absolute inset-0 z-0 opacity-5">
         <div className="grid grid-cols-12 h-full w-full">
           {[...Array(12)].map((_, i) => (
@@ -29,7 +31,8 @@ const HeroSection = () => {
         animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }}
         transition={{ duration: 6, repeat: Infinity, repeatType: "reverse" }}
       >
-        <FaReact />
+        {/* <FaReact /> */}
+        <img src={reactIcon} alt="React" className="w-12 h-12" />
       </motion.div>
 
       <motion.div
@@ -42,7 +45,8 @@ const HeroSection = () => {
           delay: 1,
         }}
       >
-        <FaNodeJs />
+        {/* <FaNodeJs /> */}
+        <img src={nodejsIcon} alt="Node.js" className="w-12 h-12" />
       </motion.div>
 
       <motion.div
@@ -55,7 +59,7 @@ const HeroSection = () => {
           delay: 2,
         }}
       >
-        <FiCode />
+        <CodeIcon className="w-8 h-8" />
       </motion.div>
 
       {/* Main container */}
@@ -75,7 +79,8 @@ const HeroSection = () => {
                 transition={{ duration: 0.4, delay: 0.6 }}
                 className="inline-flex items-center justify-center px-3 py-1 mr-3 text-xs font-medium rounded-full bg-primary-900/30 text-primary-400 border border-primary-700/50"
               >
-                <FiGithub className="mr-1" /> Design. Develop. Deliver.
+                <GithubIcon className="w-5 h-5 mr-1" /> Design. Develop.
+                Deliver.
               </motion.span>
               <motion.div
                 initial={{ width: 0 }}
@@ -110,8 +115,7 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="text-lg text-gray-400 mb-8 leading-relaxed"
             >
-              👋 Hi there, I'm Chandan - I build transformative digital solutions that
-              merge technology, creativity, and innovation. With a keen eye for detail and a user-centric approach, I transform ideas into intuitive and visually stunning designs.
+            👋 Hi there, I'm Chandan - I build transformative digital solutions that merge technology, creativity, and innovation. With a keen eye for detail and a user-centric approach, I transform ideas into intuitive and visually stunning designs.
             </motion.p>
 
             <motion.div
@@ -130,7 +134,7 @@ const HeroSection = () => {
                   whileHover={{ x: 4 }}
                   className="inline-block ml-2"
                 >
-                  <FiArrowRight />
+                  <ArrowRightIcon className="w-5 h-5" />
                 </motion.span>
               </Link>
               <Link
@@ -173,7 +177,9 @@ const HeroSection = () => {
                     <img
                       src={chandanHero}
                       alt="Hero"
-                      className="w-64 md:w-[360px] max-w-full"
+                      width={720}
+                      height={900}
+                      className="w-80 md:w-[400px] max-w-full"
                     />
                     <motion.div
                       className="absolute -top-4 -right-0 text-primary-400 text-xl"
@@ -190,8 +196,8 @@ const HeroSection = () => {
                   <div className="flex items-center">
                     <div className="w-2 h-4 bg-primary-400 animate-pulse mr-2"></div>
                     <div className="text-gray-400 font-mono text-sm">
-                      const <span className="text-primary-400">experience</span>{" "}
-                      = <span className="text-green-400">"5+ years"</span>;
+                      var <span className="text-primary-400">experience</span> ={" "}
+                      <span className="text-green-400">"5+ years"</span>;
                     </div>
                   </div>
                 </div>
@@ -204,7 +210,9 @@ const HeroSection = () => {
                 transition={{ duration: 0.6, delay: 1 }}
                 className="absolute -bottom-10 -right-6 bg-[#1A1A1A] p-4 rounded-lg shadow-lg border border-white/10"
               >
-                <div className="text-xl font-bold text-primary-400">5+ Years</div>
+                <div className="text-xl font-bold text-primary-400">
+                  5+ Years
+                </div>
                 <div className="text-gray-400">Professional Experience</div>
               </motion.div>
             </div>
