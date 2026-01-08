@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiExternalLink, FiGithub, FiFilter } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { projects } from '../data/projects';
+import { projects } from '../_data/projects';
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
