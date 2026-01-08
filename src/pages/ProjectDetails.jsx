@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiExternalLink, FiGithub, FiArrowLeft, FiTag, FiLayers, FiCalendar } from 'react-icons/fi';
-import { projects } from '../data/projects';
+import { projects } from '../_data/projects';
 
 const ProjectDetails = () => {
   const { id } = useParams();
