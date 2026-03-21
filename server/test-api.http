@@ -11,7 +11,7 @@ POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "admin@chandanportfolio.com",
+  "email": "admin@chandanmee.com",
   "password": "admin123456"
 }
 

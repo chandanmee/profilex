@@ -60,8 +60,8 @@ const KnowledgeManager = () => {
         { title: 'Performance Guide', url: 'https://web.dev/react' }
       ],
       attachments: ['react-performance-checklist.pdf'],
-      createdAt: '2024-01-15',
-      updatedAt: '2024-01-15'
+      createdAt: '2025-01-15',
+      updatedAt: '2025-01-15'
     },
     {
       id: 2,
@@ -75,8 +75,8 @@ const KnowledgeManager = () => {
         { title: 'Design Systems', url: 'https://designsystems.com' }
       ],
       attachments: [],
-      createdAt: '2024-01-12',
-      updatedAt: '2024-01-14'
+      createdAt: '2025-01-12',
+      updatedAt: '2025-01-14'
     },
     {
       id: 3,
@@ -91,8 +91,8 @@ const KnowledgeManager = () => {
         { title: 'OpenAPI Spec', url: 'https://swagger.io/specification' }
       ],
       attachments: ['api-design-checklist.md'],
-      createdAt: '2024-01-10',
-      updatedAt: '2024-01-13'
+      createdAt: '2025-01-10',
+      updatedAt: '2025-01-13'
     },
     {
       id: 4,
@@ -104,8 +104,8 @@ const KnowledgeManager = () => {
       visibility: 'public',
       externalLinks: [],
       attachments: ['research-template.xlsx'],
-      createdAt: '2024-01-08',
-      updatedAt: '2024-01-08'
+      createdAt: '2025-01-08',
+      updatedAt: '2025-01-08'
     },
     {
       id: 5,
@@ -119,8 +119,8 @@ const KnowledgeManager = () => {
         { title: 'VS Code Extensions', url: 'https://marketplace.visualstudio.com' }
       ],
       attachments: ['vscode-settings.json', 'terminal-config.sh'],
-      createdAt: '2024-01-05',
-      updatedAt: '2024-01-11'
+      createdAt: '2025-01-05',
+      updatedAt: '2025-01-11'
     }
   ];
 

@@ -44,14 +44,14 @@ const About = () => {
       id: 4,
       title: 'React.Js Essential Learning',
       issuer: 'LinkedIn',
-      date: '2024',
+      date: '2025',
       image: reactCertificate,
     },
               {
       id: 5,
       title: 'Certified Associate in Project Management(CAPM)',
       issuer: 'LinkedIn',
-      date: '2024',
+      date: '2025',
       image: pmCertificate,
     },
      {
@@ -93,7 +93,7 @@ const About = () => {
       id: 11,
       title: 'Git Essential Training',
       issuer: 'LinkedIn',
-      date: '2024',
+      date: '2025',
       image: gitCertificate,
     },
         {

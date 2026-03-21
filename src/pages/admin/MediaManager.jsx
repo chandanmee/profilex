@@ -39,10 +39,10 @@ const MediaManager = () => {
 
   // Mock data
   const mockFolders = [
-    { id: 1, name: 'Images', count: 24, createdAt: '2024-01-15' },
-    { id: 2, name: 'Documents', count: 12, createdAt: '2024-01-10' },
-    { id: 3, name: 'Videos', count: 8, createdAt: '2024-01-08' },
-    { id: 4, name: 'Audio', count: 5, createdAt: '2024-01-05' }
+    { id: 1, name: 'Images', count: 24, createdAt: '2025-01-15' },
+    { id: 2, name: 'Documents', count: 12, createdAt: '2025-01-10' },
+    { id: 3, name: 'Videos', count: 8, createdAt: '2025-01-08' },
+    { id: 4, name: 'Audio', count: 5, createdAt: '2025-01-05' }
   ];
 
   const mockFiles = [
@@ -54,7 +54,7 @@ const MediaManager = () => {
       url: '/assets/hero-background.jpg',
       folder: 'Images',
       folderId: 1,
-      uploadedAt: '2024-01-15',
+      uploadedAt: '2025-01-15',
       dimensions: '1920x1080'
     },
     {
@@ -65,7 +65,7 @@ const MediaManager = () => {
       url: '/assets/project-showcase.png',
       folder: 'Images',
       folderId: 1,
-      uploadedAt: '2024-01-14',
+      uploadedAt: '2025-01-14',
       dimensions: '1600x900'
     },
     {
@@ -76,7 +76,7 @@ const MediaManager = () => {
       url: '/assets/resume.pdf',
       folder: 'Documents',
       folderId: 2,
-      uploadedAt: '2024-01-12'
+      uploadedAt: '2025-01-12'
     },
     {
       id: 4,
@@ -86,7 +86,7 @@ const MediaManager = () => {
       url: '/assets/demo-video.mp4',
       folder: 'Videos',
       folderId: 3,
-      uploadedAt: '2024-01-10',
+      uploadedAt: '2025-01-10',
       duration: '2:34'
     },
     {
@@ -97,7 +97,7 @@ const MediaManager = () => {
       url: '/assets/background-music.mp3',
       folder: 'Audio',
       folderId: 4,
-      uploadedAt: '2024-01-08',
+      uploadedAt: '2025-01-08',
       duration: '3:45'
     },
     {
@@ -108,7 +108,7 @@ const MediaManager = () => {
       url: '/assets/logo-design.svg',
       folder: 'Images',
       folderId: 1,
-      uploadedAt: '2024-01-07'
+      uploadedAt: '2025-01-07'
     }
   ];
 

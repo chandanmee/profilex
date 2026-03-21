@@ -92,9 +92,9 @@ const AdminSidebar = ({ isCollapsed, setIsCollapsed }) => {
               transition={{ duration: 0.2 }}
               className="flex items-center space-x-3"
             >
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+              {/* <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">CM</span>
-              </div>
+              </div> */}
               <div>
                 <h2 className="text-white font-semibold text-lg">Admin Panel</h2>
                 <p className="text-gray-400 text-xs">Content Management</p>
@@ -181,11 +181,11 @@ const AdminSidebar = ({ isCollapsed, setIsCollapsed }) => {
               className="text-center"
             >
               <p className="text-gray-400 text-xs">
-                © 2024 Chandan Mee
+                © 2025 chandanmee
               </p>
-              <p className="text-gray-500 text-xs mt-1">
-                Admin Dashboard v1.0
-              </p>
+              {/* <p className="text-gray-500 text-xs mt-1">
+                Admin Dashboard v1.
+              </p> */}
             </motion.div>
           )}
         </AnimatePresence>

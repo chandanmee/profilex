@@ -74,7 +74,7 @@ Authenticate user and receive JWT token.
     "email": "admin@chandanmee.com",
     "role": "admin",
     "avatar": null,
-    "createdAt": "2024-01-15T10:30:00Z"
+    "createdAt": "2025-01-15T10:30:00Z"
   }
 }
 ```
@@ -120,7 +120,7 @@ Create a new user account (Admin only).
     "bio": "User biography",
     "avatar": null,
     "isActive": true,
-    "createdAt": "2024-01-15T11:00:00Z"
+    "createdAt": "2025-01-15T11:00:00Z"
   }
 }
 ```
@@ -153,7 +153,7 @@ Get current authenticated user information.
     "bio": "Administrator biography",
     "avatar": null,
     "isActive": true,
-    "createdAt": "2024-01-15T10:30:00Z"
+    "createdAt": "2025-01-15T10:30:00Z"
   }
 }
 ```
@@ -196,8 +196,8 @@ Update current user profile.
     "bio": "Updated biography",
     "avatar": "https://example.com/avatar.jpg",
     "isActive": true,
-    "createdAt": "2024-01-15T10:30:00Z",
-    "updatedAt": "2024-01-15T12:00:00Z"
+    "createdAt": "2025-01-15T10:30:00Z",
+    "updatedAt": "2025-01-15T12:00:00Z"
   }
 }
 ```
@@ -273,7 +273,7 @@ Get all users (Admin only).
       "bio": "User biography",
       "avatar": null,
       "isActive": true,
-      "createdAt": "2024-01-15T10:30:00Z"
+      "createdAt": "2025-01-15T10:30:00Z"
     }
   ]
 }
@@ -305,7 +305,7 @@ Get specific user by ID (Admin only).
     "bio": "User biography",
     "avatar": null,
     "isActive": true,
-    "createdAt": "2024-01-15T10:30:00Z"
+    "createdAt": "2025-01-15T10:30:00Z"
   }
 }
 ```
@@ -351,8 +351,8 @@ Update user by ID (Admin only).
     "bio": "Updated biography",
     "avatar": null,
     "isActive": false,
-    "createdAt": "2024-01-15T10:30:00Z",
-    "updatedAt": "2024-01-15T12:00:00Z"
+    "createdAt": "2025-01-15T10:30:00Z",
+    "updatedAt": "2025-01-15T12:00:00Z"
   }
 }
 ```
@@ -473,9 +473,9 @@ Get all blog posts with pagination and filtering.
       "likes": 25,
       "author": "Admin User",
       "slug": "blog-post-title",
-      "publishedAt": "2024-01-15T10:30:00Z",
-      "createdAt": "2024-01-15T10:30:00Z",
-      "updatedAt": "2024-01-15T10:30:00Z"
+      "publishedAt": "2025-01-15T10:30:00Z",
+      "createdAt": "2025-01-15T10:30:00Z",
+      "updatedAt": "2025-01-15T10:30:00Z"
     }
   ]
 }
@@ -511,9 +511,9 @@ Get a specific blog post by ID.
     "likes": 25,
     "author": "Admin User",
     "slug": "blog-post-title",
-    "publishedAt": "2024-01-15T10:30:00Z",
-    "createdAt": "2024-01-15T10:30:00Z",
-    "updatedAt": "2024-01-15T10:30:00Z"
+    "publishedAt": "2025-01-15T10:30:00Z",
+    "createdAt": "2025-01-15T10:30:00Z",
+    "updatedAt": "2025-01-15T10:30:00Z"
   }
 }
 ```
@@ -548,9 +548,9 @@ Get a specific blog post by slug.
     "likes": 25,
     "author": "Admin User",
     "slug": "blog-post-title",
-    "publishedAt": "2024-01-15T10:30:00Z",
-    "createdAt": "2024-01-15T10:30:00Z",
-    "updatedAt": "2024-01-15T10:30:00Z"
+    "publishedAt": "2025-01-15T10:30:00Z",
+    "createdAt": "2025-01-15T10:30:00Z",
+    "updatedAt": "2025-01-15T10:30:00Z"
   }
 }
 ```
@@ -585,9 +585,9 @@ Get related blog posts.
       "likes": 12,
       "author": "Admin User",
       "slug": "related-blog-post",
-      "publishedAt": "2024-01-10T10:30:00Z",
-      "createdAt": "2024-01-10T10:30:00Z",
-      "updatedAt": "2024-01-10T10:30:00Z"
+      "publishedAt": "2025-01-10T10:30:00Z",
+      "createdAt": "2025-01-10T10:30:00Z",
+      "updatedAt": "2025-01-10T10:30:00Z"
     }
   ]
 }
@@ -640,9 +640,9 @@ Create a new blog post (Admin only).
     "likes": 0,
     "author": "Admin User",
     "slug": "new-blog-post",
-    "publishedAt": "2024-01-15T11:00:00Z",
-    "createdAt": "2024-01-15T11:00:00Z",
-    "updatedAt": "2024-01-15T11:00:00Z"
+    "publishedAt": "2025-01-15T11:00:00Z",
+    "createdAt": "2025-01-15T11:00:00Z",
+    "updatedAt": "2025-01-15T11:00:00Z"
   }
 }
 ```
@@ -696,9 +696,9 @@ Update an existing blog post (Admin only).
     "likes": 25,
     "author": "Admin User",
     "slug": "updated-blog-post-title",
-    "publishedAt": "2024-01-15T10:30:00Z",
-    "createdAt": "2024-01-15T10:30:00Z",
-    "updatedAt": "2024-01-15T11:15:00Z"
+    "publishedAt": "2025-01-15T10:30:00Z",
+    "createdAt": "2025-01-15T10:30:00Z",
+    "updatedAt": "2025-01-15T11:15:00Z"
   }
 }
 ```
@@ -825,7 +825,7 @@ Submit a contact form.
     "name": "John Doe",
     "email": "john@example.com",
     "subject": "Project Inquiry",
-    "createdAt": "2024-01-15T12:00:00Z"
+    "createdAt": "2025-01-15T12:00:00Z"
   }
 }
 ```
@@ -868,7 +868,7 @@ Get all contact submissions (Admin only).
       "status": "unread",
       "ipAddress": "192.168.1.1",
       "userAgent": "Mozilla/5.0...",
-      "createdAt": "2024-01-15T12:00:00Z"
+      "createdAt": "2025-01-15T12:00:00Z"
     }
   ]
 }
@@ -901,7 +901,7 @@ Get a specific contact submission (Admin only).
     "status": "unread",
     "ipAddress": "192.168.1.1",
     "userAgent": "Mozilla/5.0...",
-    "createdAt": "2024-01-15T12:00:00Z"
+    "createdAt": "2025-01-15T12:00:00Z"
   }
 }
 ```
@@ -944,8 +944,8 @@ Update contact submission status (Admin only).
     "status": "read",
     "ipAddress": "192.168.1.1",
     "userAgent": "Mozilla/5.0...",
-    "createdAt": "2024-01-15T12:00:00Z",
-    "updatedAt": "2024-01-15T12:30:00Z"
+    "createdAt": "2025-01-15T12:00:00Z",
+    "updatedAt": "2025-01-15T12:30:00Z"
   }
 }
 ```
@@ -1264,5 +1264,5 @@ For API support or questions, please contact:
 
 ---
 
-**Last Updated:** January 2024
+**Last Updated:** January 2025
 **API Version:** 1.0.0

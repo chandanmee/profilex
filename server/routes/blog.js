@@ -14,8 +14,8 @@ const router = express.Router();
 
 // @desc    Get all blogs
 // @route   GET /api/blog
-// @access  Public
-router.get('/', validateBlogQuery, catchAsync(async (req, res) => {
+// @access  Public (optionally authenticated to allow admin filters)
+router.get('/', optionalAuth, validateBlogQuery, catchAsync(async (req, res) => {
   const {
     page = 1,
     limit = 10,

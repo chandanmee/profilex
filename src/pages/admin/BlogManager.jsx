@@ -266,10 +266,9 @@ const BlogManager = () => {
                 {/* Advanced Filters Toggle */}
                 <button
                   onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-                  className="inline-flex items-center px-3 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
+                  className="px-4 py-2 inline-flex items-center bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
                 >
-                  <FiFilter className="w-4 h-4 mr-2" />
-                  Advanced Filters
+                  <FiFilter className="w-4 h-4"/>
                 </button>
 
                 {/* Sort Controls */}
@@ -425,7 +424,7 @@ const BlogManager = () => {
                           <h3 className="text-sm font-medium text-gray-900 dark:text-white">
                             {blog.title}
                           </h3>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 truncate max-w-xs">
                             {blog.excerpt || 'No excerpt available'}
                           </p>
                         </div>

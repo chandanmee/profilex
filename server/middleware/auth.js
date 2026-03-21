@@ -24,7 +24,9 @@ export const protect = async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
       // Get user from token - fix field name mismatch
-      req.user = await User.findById(decoded.userId).select('-password');
+     
+        // Use the same field as in the login token payload (userId)
+        req.user = await User.findById(decoded.userId).select('-password');
 
       if (!req.user) {
         return res.status(401).json({
@@ -81,7 +83,8 @@ export const optionalAuth = async (req, res, next) => {
     if (token) {
       try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = await User.findById(decoded.id).select('-password');
+        // Use the same field as in the login token payload (userId)
+        req.user = await User.findById(decoded.userId).select('-password');
       } catch (error) {
         // Token is invalid, but we continue without user
         req.user = null;

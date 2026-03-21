@@ -21,7 +21,7 @@ const createAdmin = async () => {
 
     // Create admin user
     const adminUser = await User.create({
-      name: 'Chandan Admin',
+      name: 'chandanmee',
       email: 'admin@chandanmee.com',
       password: 'admin123456', // This will be hashed automatically
       role: 'admin',

@@ -1,60 +1,70 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FiMail, FiPhone, FiMapPin, FiSend, FiGithub, FiLinkedin, FiTwitter, FiAlertCircle } from 'react-icons/fi';
-import { submitContactForm } from '../api/contact.js';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  FiMail,
+  FiPhone,
+  FiMapPin,
+  FiSend,
+  FiGithub,
+  FiLinkedin,
+  FiTwitter,
+  FiAlertCircle,
+} from "react-icons/fi";
+import { submitContactForm } from "../api/contact.js";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setErrorMessage('');
-    
+    setErrorMessage("");
+
     try {
       // Submit form data to backend API
       await submitContactForm(formData);
-      
+
       // Handle success
-      setSubmitStatus('success');
+      setSubmitStatus("success");
       setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
       });
-      
+
       // Reset status after 5 seconds
       setTimeout(() => {
         setSubmitStatus(null);
       }, 5000);
     } catch (error) {
       // Handle error
-      setSubmitStatus('error');
-      setErrorMessage(error.message || 'Failed to send message. Please try again later.');
-      
+      setSubmitStatus("error");
+      setErrorMessage(
+        error.message || "Failed to send message. Please try again later.",
+      );
+
       // Reset error status after 5 seconds
       setTimeout(() => {
         setSubmitStatus(null);
-        setErrorMessage('');
+        setErrorMessage("");
       }, 5000);
     } finally {
       setIsSubmitting(false);
@@ -64,28 +74,32 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: <FiMail />,
-      title: 'Email',
-      content: 'contact@chandanmee.com',
-      link: 'mailto:contact@chandanmee.com',
+      title: "Email",
+      content: "contact@chandanmee.com",
+      link: "mailto:contact@chandanmee.com",
     },
     {
       icon: <FiPhone />,
-      title: 'Phone',
-      content: '+91 9438 143118',
-      link: 'tel:+919438143118',
+      title: "Phone",
+      content: "+91 9438 143118",
+      link: "tel:+919438143118",
     },
     {
       icon: <FiMapPin />,
-      title: 'Location',
-      content: 'Spice Garden, AECS Layout, Marathalli, Bengaluru',
-      link: 'https://maps.google.com/?q=New+Delhi,+India',
+      title: "Location",
+      content: "Spice Garden, AECS Layout, Marathalli, Bengaluru, 560037",
+      link: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6682.315278839154!2d77.70737415409576!3d12.959800750446856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae123044d4df05%3A0x311838a3d129760d!2sSpice%20Garden%20Rd%2C%20Lakshminarayana%20Pura%2C%20Munnekollal%2C%20Bengaluru%2C%20Karnataka%20560037!5e0!3m2!1sen!2sin!4v1642655727788!5m2!1sen!2sin",
     },
   ];
 
   const socialLinks = [
-    { icon: <FiGithub />, link: 'https://github.com/', label: 'GitHub' },
-    { icon: <FiLinkedin />, link: 'https://linkedin.com/in/', label: 'LinkedIn' },
-    { icon: <FiTwitter />, link: 'https://twitter.com/', label: 'Twitter' },
+    { icon: <FiGithub />, link: "https://github.com/", label: "GitHub" },
+    {
+      icon: <FiLinkedin />,
+      link: "https://linkedin.com/in/",
+      label: "LinkedIn",
+    },
+    { icon: <FiTwitter />, link: "https://twitter.com/", label: "Twitter" },
   ];
 
   return (
@@ -99,10 +113,14 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-5xl font-bold text-dark-900 dark:text-white mb-6">
-              Get In <span className="text-primary-600 dark:text-primary-400">Touch</span>
+              Get In{" "}
+              <span className="text-primary-600 dark:text-primary-400">
+                Touch
+              </span>
             </h1>
             <p className="text-xl text-dark-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Have a project in mind or want to collaborate? Feel free to reach out and I'll get back to you as soon as possible.
+              Have a project in mind or want to collaborate? Feel free to reach
+              out and I'll get back to you as soon as possible.
             </p>
           </motion.div>
         </div>
@@ -122,7 +140,7 @@ const Contact = () => {
               <h2 className="text-2xl font-bold text-dark-900 dark:text-white mb-6">
                 Contact Information
               </h2>
-              
+
               <div className="space-y-6">
                 {contactInfo.map((item, index) => (
                   <div key={index} className="flex items-start">
@@ -130,9 +148,11 @@ const Contact = () => {
                       {item.icon}
                     </div>
                     <div>
-                      <h3 className="text-lg font-medium text-dark-900 dark:text-white">{item.title}</h3>
-                      <a 
-                        href={item.link} 
+                      <h3 className="text-lg font-medium text-dark-900 dark:text-white">
+                        {item.title}
+                      </h3>
+                      <a
+                        href={item.link}
                         className="text-dark-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -145,7 +165,9 @@ const Contact = () => {
               </div>
 
               <div>
-                <h3 className="text-lg font-medium text-dark-900 dark:text-white mb-4">Follow Me</h3>
+                <h3 className="text-lg font-medium text-dark-900 dark:text-white mb-4">
+                  Follow Me
+                </h3>
                 <div className="flex space-x-4">
                   {socialLinks.map((social, index) => (
                     <motion.a
@@ -177,14 +199,17 @@ const Contact = () => {
                   Send Me a Message
                 </h2>
 
-                {submitStatus === 'success' && (
+                {submitStatus === "success" && (
                   <div className="mb-6 p-4 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400 rounded-lg flex items-start">
                     <span className="mr-2 mt-0.5">✓</span>
-                    <span>Your message has been sent successfully! I'll get back to you soon.</span>
+                    <span>
+                      Your message has been sent successfully! I'll get back to
+                      you soon.
+                    </span>
                   </div>
                 )}
-                
-                {submitStatus === 'error' && (
+
+                {submitStatus === "error" && (
                   <div className="mb-6 p-4 bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400 rounded-lg flex items-start">
                     <FiAlertCircle className="mr-2 mt-0.5 flex-shrink-0" />
                     <span>{errorMessage}</span>
@@ -194,7 +219,10 @@ const Contact = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block mb-2 text-dark-700 dark:text-gray-300">
+                      <label
+                        htmlFor="name"
+                        className="block mb-2 text-dark-700 dark:text-gray-300"
+                      >
                         Your Name
                       </label>
                       <input
@@ -208,7 +236,10 @@ const Contact = () => {
                       />
                     </div>
                     <div>
-                      <label htmlFor="email" className="block mb-2 text-dark-700 dark:text-gray-300">
+                      <label
+                        htmlFor="email"
+                        className="block mb-2 text-dark-700 dark:text-gray-300"
+                      >
                         Your Email
                       </label>
                       <input
@@ -223,7 +254,10 @@ const Contact = () => {
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="subject" className="block mb-2 text-dark-700 dark:text-gray-300">
+                    <label
+                      htmlFor="subject"
+                      className="block mb-2 text-dark-700 dark:text-gray-300"
+                    >
                       Subject
                     </label>
                     <input
@@ -237,7 +271,10 @@ const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="message" className="block mb-2 text-dark-700 dark:text-gray-300">
+                    <label
+                      htmlFor="message"
+                      className="block mb-2 text-dark-700 dark:text-gray-300"
+                    >
                       Your Message
                     </label>
                     <textarea
@@ -258,9 +295,25 @@ const Contact = () => {
                     >
                       {isSubmitting ? (
                         <span className="flex items-center">
-                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          <svg
+                            className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            ></circle>
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            ></path>
                           </svg>
                           Sending...
                         </span>
@@ -291,6 +344,9 @@ const Contact = () => {
             <h2 className="text-3xl font-bold text-dark-900 dark:text-white mb-4">
               Find Me Here
             </h2>
+                  <p className="text-xl text-dark-600 dark:text-gray-300 max-w-3xl mx-auto">
+      This is where I'm based. Let's meet for a coffee if you're nearby!
+            </p>
           </motion.div>
 
           <motion.div
@@ -301,13 +357,24 @@ const Contact = () => {
             className="rounded-lg overflow-hidden shadow-lg h-96 bg-gray-200 dark:bg-dark-700 flex items-center justify-center"
           >
             {/* Placeholder for map - in a real project, you would integrate Google Maps or another map service */}
-            <div className="text-center p-8">
+            {/* <div className="text-center p-8">
               <FiMapPin className="text-6xl text-primary-600 dark:text-primary-400 mx-auto mb-4" />
-              <h3 className="text-xl font-medium text-dark-900 dark:text-white mb-2">New Delhi, India</h3>
+              <h3 className="text-xl font-medium text-dark-900 dark:text-white mb-2">Bengaluru, India</h3>
               <p className="text-dark-600 dark:text-gray-300">
                 This is where I'm based. Let's meet for a coffee if you're nearby!
               </p>
-            </div>
+            </div> */}
+
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6682.315278839154!2d77.70737415409576!3d12.959800750446856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae123044d4df05%3A0x311838a3d129760d!2sSpice%20Garden%20Rd%2C%20Lakshminarayana%20Pura%2C%20Munnekollal%2C%20Bengaluru%2C%20Karnataka%20560037!5e0!3m2!1sen!2sin!4v1642655727788!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Google Map"
+            />
           </motion.div>
         </div>
       </section>

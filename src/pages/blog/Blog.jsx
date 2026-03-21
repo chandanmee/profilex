@@ -120,12 +120,13 @@ const Blog = () => {
   // Categories for filtering
   const categories = [
     { id: 'all', name: 'All Categories' },
-    { id: 'web-development', name: 'Web Development' },
+    { id: 'frontend', name: 'Frontend' },
+    { id: 'backend', name: 'Backend' },
     { id: 'performance', name: 'Performance' },
     { id: 'design', name: 'Design' },
-    { id: 'css', name: 'CSS' },
     { id: 'frameworks', name: 'Frameworks' },
     { id: 'seo', name: 'SEO' },
+    { id: 'architecture', name: 'Architecture' },
   ];
 
   // Filter posts based on search term and selected category
@@ -223,7 +224,7 @@ const Blog = () => {
               className="text-center py-16"
             >
               <h3 className="text-xl font-medium text-dark-900 dark:text-white mb-2">
-                Error Loading Blog Posts
+              Something went wrong!!
               </h3>
               <p className="text-dark-600 dark:text-gray-300">{error}</p>
             </motion.div>

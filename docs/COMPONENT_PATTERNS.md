@@ -540,7 +540,7 @@ const mockBlog = {
   id: '1',
   title: 'Test Blog',
   excerpt: 'Test excerpt',
-  createdAt: '2024-01-01'
+  createdAt: '2025-01-01'
 };
 
 const renderWithRouter = (component) => {

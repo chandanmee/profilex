@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+
 import {
   FiEdit3,
   FiBookOpen,
@@ -14,12 +15,11 @@ import {
   FiPlus,
   FiSettings
 } from 'react-icons/fi';
+
 import { getDashboardStats } from '../../api/blog.js';
-import AdminSidebar from '../../components/AdminSidebar';
-import AdminHeader from '../../components/AdminHeader';
+
 
 const AdminDashboard = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const [stats, setStats] = useState({
     totalBlogs: 0,
     publishedBlogs: 0,
@@ -135,31 +135,17 @@ const AdminDashboard = () => {
 
   if (loading) {
     return (
-      <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
-        <AdminSidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
-        <div className={`flex-1 transition-all duration-300 ${isCollapsed ? 'ml-20' : 'ml-80'}`}>
-          <div className="flex items-center justify-center h-full">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500 mx-auto mb-4"></div>
-              <p className="text-gray-600 dark:text-gray-400">Loading dashboard...</p>
-            </div>
-          </div>
+      <div className="flex items-center justify-center h-full">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">Loading dashboard...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
-      <AdminSidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
-      <div className={`flex-1 transition-all duration-300 ${isCollapsed ? 'ml-20' : 'ml-80'}`}>
-        <div className="p-8 overflow-y-auto h-full">
-          {/* Admin Header */}
-          <AdminHeader 
-            title="Dashboard Overview" 
-            subtitle="Monitor your portfolio performance and analytics" 
-          />
-
+    <div>
           {/* Error Message */}
           {error && (
             <motion.div
@@ -322,9 +308,7 @@ const AdminDashboard = () => {
                 ))}
               </div>
             </div>
-          </motion.div>
-        </div>
-      </div>
+     </motion.div>
     </div>
   );
 };

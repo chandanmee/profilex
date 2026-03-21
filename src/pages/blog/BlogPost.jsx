@@ -1070,7 +1070,7 @@ const BlogPost = () => {
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-dark-900 dark:text-white mb-1">{post.author}</h3>
                   <p className="text-sm text-dark-600 dark:text-gray-300 mb-3 leading-relaxed">
-                    Web Developer & Digital Marketing Professional with a passion for creating efficient, user-friendly, and visually appealing web solutions.
+                    I'm Chandan - I build transformative digital solutions that merge technology, creativity, and innovation. With a keen eye for detail and a user-centric approach, I transform ideas into intuitive and visually stunning designs.
                   </p>
                   <div className="flex space-x-3">
                     <a href="#" className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-lg">
